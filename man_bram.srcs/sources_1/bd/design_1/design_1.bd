@@ -1,0 +1,245 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xF7E90559DBE54173",
+      "device": "xc7s25csga324-1",
+      "gen_directory": "../../../../man_bram.gen/sources_1/bd/design_1",
+      "name": "design_1",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2025.1",
+      "validated": "true"
+    },
+    "design_tree": {
+      "UART_0": "",
+      "proc_sys_reset_0": "",
+      "system_ila_0": ""
+    },
+    "ports": {
+      "UART_RXD_0": {
+        "direction": "I"
+      },
+      "UART_TXD_0": {
+        "direction": "O"
+      },
+      "clk_in1_0": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "ext_reset_in_0"
+          },
+          "CLK_DOMAIN": {
+            "value": "design_1_clk_in1_0",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "ext_reset_in_0": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
+      }
+    },
+    "components": {
+      "UART_0": {
+        "vlnv": "xilinx.com:module_ref:UART:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_UART_0_2",
+        "xci_path": "ip\\design_1_UART_0_2\\design_1_UART_0_2.xci",
+        "inst_hier_path": "UART_0",
+        "has_run_ip_tcl": "true",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "UART",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "CLK": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "RST",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_in1_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "RST": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_HIGH",
+                "value_src": "const_prop"
+              }
+            }
+          },
+          "UART_TXD": {
+            "direction": "O"
+          },
+          "UART_RXD": {
+            "direction": "I"
+          },
+          "DIN": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "DIN_VLD": {
+            "direction": "I"
+          },
+          "DIN_RDY": {
+            "direction": "O"
+          },
+          "DOUT": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          },
+          "DOUT_VLD": {
+            "direction": "O"
+          },
+          "FRAME_ERROR": {
+            "direction": "O"
+          },
+          "PARITY_ERROR": {
+            "direction": "O"
+          }
+        }
+      },
+      "proc_sys_reset_0": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "17",
+        "xci_name": "design_1_proc_sys_reset_0_0",
+        "xci_path": "ip\\design_1_proc_sys_reset_0_0\\design_1_proc_sys_reset_0_0.xci",
+        "inst_hier_path": "proc_sys_reset_0",
+        "has_run_ip_tcl": "true"
+      },
+      "system_ila_0": {
+        "vlnv": "xilinx.com:ip:system_ila:1.1",
+        "ip_revision": "21",
+        "xci_name": "design_1_system_ila_0_2",
+        "xci_path": "ip\\design_1_system_ila_0_2\\design_1_system_ila_0_2.xci",
+        "inst_hier_path": "system_ila_0",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "C_DATA_DEPTH": {
+            "value": "65536"
+          },
+          "C_MON_TYPE": {
+            "value": "NATIVE"
+          },
+          "C_NUM_OF_PROBES": {
+            "value": "2"
+          },
+          "C_PROBE0_TYPE": {
+            "value": "0"
+          },
+          "C_PROBE0_WIDTH": {
+            "value": "8"
+          },
+          "C_PROBE1_TYPE": {
+            "value": "0"
+          },
+          "C_PROBE_WIDTH_PROPAGATION": {
+            "value": "MANUAL"
+          }
+        }
+      }
+    },
+    "nets": {
+      "UART_0_DOUT": {
+        "ports": [
+          "UART_0/DOUT",
+          "system_ila_0/probe0",
+          "UART_0/DIN"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
+      },
+      "UART_0_DOUT_VLD": {
+        "ports": [
+          "UART_0/DOUT_VLD",
+          "system_ila_0/probe1",
+          "UART_0/DIN_VLD"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
+      },
+      "UART_0_UART_TXD": {
+        "ports": [
+          "UART_0/UART_TXD",
+          "UART_TXD_0"
+        ]
+      },
+      "UART_RXD_0_1": {
+        "ports": [
+          "UART_RXD_0",
+          "UART_0/UART_RXD"
+        ]
+      },
+      "clk_wiz_1_clk_out1": {
+        "ports": [
+          "clk_in1_0",
+          "proc_sys_reset_0/slowest_sync_clk",
+          "system_ila_0/clk",
+          "UART_0/CLK"
+        ]
+      },
+      "ext_reset_in_0_1": {
+        "ports": [
+          "ext_reset_in_0",
+          "proc_sys_reset_0/ext_reset_in"
+        ]
+      },
+      "proc_sys_reset_0_peripheral_reset": {
+        "ports": [
+          "proc_sys_reset_0/peripheral_reset",
+          "UART_0/RST"
+        ]
+      }
+    }
+  }
+}

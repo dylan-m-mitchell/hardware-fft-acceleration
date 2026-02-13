@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root MajorVersion="0" MinorVersion="43">
+  <CompositeFile CompositeFileTopName="loopback_uart_no_rst" CanBeSetAsTop="false" CanDisplayChildGraph="true">
+    <Description>Composite Fileset</Description>
+    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1769711880"/>
+    <Generation Name="SIMULATION" State="STALE" Timestamp="1769711880"/>
+    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1769711880"/>
+    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1769711880"/>
+    <FileCollection Name="SOURCES" Type="SOURCES"/>
+  </CompositeFile>
+</Root>
