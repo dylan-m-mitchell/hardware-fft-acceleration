@@ -85,10 +85,10 @@ module to_ram_tb();
         
         $display("Starting to_ram testbench...");
         
-        // Send a single double value as 8 bytes (MSB first)
+        // Send a single double value as 8 bytes (little-endian: byte 0 first)
         r_double = 3.141592653589793;
         r_double_bits = $realtobits(r_double);
-        for (i = 7; i >= 0; i = i - 1) begin
+        for (i = 0; i < 8; i = i + 1) begin
             send_byte(r_double_bits[i*8 +: 8]);
         end
         

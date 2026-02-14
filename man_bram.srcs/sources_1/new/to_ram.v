@@ -61,7 +61,7 @@ module to_ram #(parameter DEPTH = 256)(
             case (state)
                 STATE_NOT_FULL: begin         // NOT_FULL CASE
                     if (i_d_valid) begin
-                        shift_reg <= {shift_reg[55:0], i_data};
+                        shift_reg <= {i_data, shift_reg[63:8]};
                         byte_cnt <= byte_cnt + 3'd1;
                         if (byte_cnt == 3'd7) begin
                             // Initiate read for RMW
