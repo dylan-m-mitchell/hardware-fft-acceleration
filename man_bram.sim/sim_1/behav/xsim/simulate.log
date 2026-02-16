@@ -1,4 +1,4 @@
 Time resolution is 1 ps
 Starting to_ram testbench...
 Test complete.
-$finish called at time : 315 ns : File "C:/Users/dlnmt/man_bram/man_bram.srcs/sim_1/new/to_ram_tb.v" Line 111
+$finish called at time : 285 ns : File "C:/Users/dlnmt/man_bram/man_bram.srcs/sim_1/new/to_ram_tb.v" Line 91

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Feb 12 23:47:41 2026" VIVADOVERSION="2025.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Feb 16 16:23:32 2026" VIVADOVERSION="2025.1">
 
   <SYSTEMINFO ARCH="spartan7" BOARD="digilentinc.com:arty-s7-25:part0:1.1" DEVICE="7s25" NAME="design_1" PACKAGE="csga324" SPEEDGRADE="-1"/>
 
@@ -17,8 +17,11 @@
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk_in1_0" SIGIS="clk" SIGNAME="External_Ports_clk_in1_0">
       <CONNECTIONS>
         <CONNECTION INSTANCE="proc_sys_reset_0" PORT="slowest_sync_clk"/>
-        <CONNECTION INSTANCE="system_ila_0" PORT="clk"/>
         <CONNECTION INSTANCE="UART_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="RAM64_0" PORT="i_Wr_Clk"/>
+        <CONNECTION INSTANCE="RAM64_0" PORT="i_Rd_Clk"/>
+        <CONNECTION INSTANCE="system_ila_0" PORT="clk"/>
+        <CONNECTION INSTANCE="to_ram_0" PORT="i_clk"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="ext_reset_in_0" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_ext_reset_in_0">
@@ -31,6 +34,51 @@
   <EXTERNALINTERFACES/>
 
   <MODULES>
+    <MODULE COREREVISION="1" FULLNAME="/RAM64_0" HWVERSION="1.0" INSTANCE="RAM64_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="RAM64" VLNV="xilinx.com:module_ref:RAM64:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="DEPTH" VALUE="256"/>
+        <PARAMETER NAME="WIDTH" VALUE="64"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_RAM64_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="7" NAME="i_Rd_Addr" RIGHT="0" SIGIS="undef"/>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="i_Rd_Clk" SIGIS="clk" SIGNAME="External_Ports_clk_in1_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_in1_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="i_Rd_En" SIGIS="undef"/>
+        <PORT DIR="I" LEFT="7" NAME="i_Wr_Addr" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_addr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="to_ram_0" PORT="o_wr_addr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="i_Wr_Clk" SIGIS="clk" SIGNAME="External_Ports_clk_in1_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_in1_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="i_Wr_DV" SIGIS="undef" SIGNAME="to_ram_0_o_wr_dv">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="to_ram_0" PORT="o_wr_dv"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="63" NAME="i_Wr_Data" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_data">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="to_ram_0" PORT="o_wr_data"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="o_Rd_DV" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="63" NAME="o_Rd_Data" RIGHT="0" SIGIS="undef" SIGNAME="RAM64_0_o_Rd_Data">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="system_ila_0" PORT="probe0"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
     <MODULE COREREVISION="1" FULLNAME="/UART_0" HWVERSION="1.0" INSTANCE="UART_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="UART" VLNV="xilinx.com:module_ref:UART:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
@@ -47,27 +95,18 @@
             <CONNECTION INSTANCE="External_Ports" PORT="clk_in1_0"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="DIN" RIGHT="0" SIGIS="undef" SIGNAME="UART_0_DOUT">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="UART_0" PORT="DOUT"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="DIN" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="O" NAME="DIN_RDY" SIGIS="undef"/>
-        <PORT DIR="I" NAME="DIN_VLD" SIGIS="undef" SIGNAME="UART_0_DOUT_VLD">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="UART_0" PORT="DOUT_VLD"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="I" NAME="DIN_VLD" SIGIS="undef"/>
         <PORT DIR="O" LEFT="7" NAME="DOUT" RIGHT="0" SIGIS="undef" SIGNAME="UART_0_DOUT">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="system_ila_0" PORT="probe0"/>
-            <CONNECTION INSTANCE="UART_0" PORT="DIN"/>
+            <CONNECTION INSTANCE="to_ram_0" PORT="i_data"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="DOUT_VLD" SIGIS="undef" SIGNAME="UART_0_DOUT_VLD">
           <CONNECTIONS>
             <CONNECTION INSTANCE="system_ila_0" PORT="probe1"/>
-            <CONNECTION INSTANCE="UART_0" PORT="DIN_VLD"/>
+            <CONNECTION INSTANCE="to_ram_0" PORT="i_d_valid"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="FRAME_ERROR" SIGIS="undef"/>
@@ -135,7 +174,7 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE BD="design_1_system_ila_0_2" BDTYPE="SBD" COREREVISION="21" DRIVERMODE="MIXED" FULLNAME="/system_ila_0" HWVERSION="1.1" INSTANCE="system_ila_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="system_ila" SIM_BD="design_1_system_ila_0_2" VLNV="xilinx.com:ip:system_ila:1.1">
+    <MODULE BD="design_1_system_ila_0_4" BDTYPE="SBD" COREREVISION="21" DRIVERMODE="MIXED" FULLNAME="/system_ila_0" HWVERSION="1.1" INSTANCE="system_ila_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="system_ila" SIM_BD="design_1_system_ila_0_4" VLNV="xilinx.com:ip:system_ila:1.1">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=system_ila;v=v1_1;d=pg261-system-ila.pdf"/>
       </DOCUMENTS>
@@ -144,7 +183,7 @@
         <PARAMETER NAME="ALL_PROBE_SAME_MU_CNT" VALUE="1"/>
         <PARAMETER NAME="C_ADV_TRIGGER" VALUE="FALSE"/>
         <PARAMETER NAME="C_BRAM_CNT" VALUE="0.0"/>
-        <PARAMETER NAME="C_DATA_DEPTH" VALUE="65536"/>
+        <PARAMETER NAME="C_DATA_DEPTH" VALUE="1024"/>
         <PARAMETER NAME="C_DDR_CLK_GEN" VALUE="FALSE"/>
         <PARAMETER NAME="C_EN_DDR_ILA" VALUE="FALSE"/>
         <PARAMETER NAME="C_EN_STRG_QUAL" VALUE="0"/>
@@ -152,10 +191,10 @@
         <PARAMETER NAME="C_INPUT_PIPE_STAGES" VALUE="0"/>
         <PARAMETER NAME="C_MON_TYPE" VALUE="NATIVE"/>
         <PARAMETER NAME="C_NUM_MONITOR_SLOTS" VALUE="1"/>
-        <PARAMETER NAME="C_NUM_OF_PROBES" VALUE="2"/>
+        <PARAMETER NAME="C_NUM_OF_PROBES" VALUE="5"/>
         <PARAMETER NAME="C_PROBE0_MU_CNT" VALUE="1"/>
-        <PARAMETER NAME="C_PROBE0_TYPE" VALUE="0"/>
-        <PARAMETER NAME="C_PROBE0_WIDTH" VALUE="8"/>
+        <PARAMETER NAME="C_PROBE0_TYPE" VALUE="1"/>
+        <PARAMETER NAME="C_PROBE0_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_PROBE1000_MU_CNT" VALUE="1"/>
         <PARAMETER NAME="C_PROBE1000_TYPE" VALUE="0"/>
         <PARAMETER NAME="C_PROBE1000_WIDTH" VALUE="1"/>
@@ -3225,7 +3264,7 @@
         <PARAMETER NAME="C_PROBE9_MU_CNT" VALUE="1"/>
         <PARAMETER NAME="C_PROBE9_TYPE" VALUE="0"/>
         <PARAMETER NAME="C_PROBE9_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="C_PROBE_WIDTH_PROPAGATION" VALUE="MANUAL"/>
+        <PARAMETER NAME="C_PROBE_WIDTH_PROPAGATION" VALUE="AUTO"/>
         <PARAMETER NAME="C_SLOT" VALUE="0"/>
         <PARAMETER NAME="C_SLOT_0_APC_EN" VALUE="0"/>
         <PARAMETER NAME="C_SLOT_0_APC_MAX_AR_WAITS" VALUE="0"/>
@@ -4111,7 +4150,7 @@
         <PARAMETER NAME="C_TRIGIN_EN" VALUE="false"/>
         <PARAMETER NAME="C_TRIGOUT_EN" VALUE="false"/>
         <PARAMETER NAME="C_XLNX_HW_PROBE_INFO" VALUE="DEFAULT"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_system_ila_0_2"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_system_ila_0_4"/>
         <PARAMETER NAME="EN_BRAM_DRC" VALUE="TRUE"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -4121,14 +4160,74 @@
             <CONNECTION INSTANCE="External_Ports" PORT="clk_in1_0"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="probe0" RIGHT="0" SIGIS="undef" SIGNAME="UART_0_DOUT">
+        <PORT DIR="I" LEFT="63" NAME="probe0" RIGHT="0" SIGIS="undef" SIGNAME="RAM64_0_o_Rd_Data">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="UART_0" PORT="DOUT"/>
+            <CONNECTION INSTANCE="RAM64_0" PORT="o_Rd_Data"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="0" NAME="probe1" RIGHT="0" SIGIS="undef" SIGNAME="UART_0_DOUT_VLD">
           <CONNECTIONS>
             <CONNECTION INSTANCE="UART_0" PORT="DOUT_VLD"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="probe2" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_addr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="to_ram_0" PORT="o_wr_addr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="63" NAME="probe3" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_data">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="to_ram_0" PORT="o_wr_data"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="probe4" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_dv">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="to_ram_0" PORT="o_wr_dv"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/to_ram_0" HWVERSION="1.0" INSTANCE="to_ram_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="to_ram" VLNV="xilinx.com:module_ref:to_ram:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="DEPTH" VALUE="256"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_to_ram_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="i_clk" SIGIS="clk" SIGNAME="External_Ports_clk_in1_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_in1_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="i_d_valid" SIGIS="undef" SIGNAME="UART_0_DOUT_VLD">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="UART_0" PORT="DOUT_VLD"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="i_data" RIGHT="0" SIGIS="undef" SIGNAME="UART_0_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="UART_0" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="i_rst_n" POLARITY="ACTIVE_LOW" SIGIS="rst"/>
+        <PORT DIR="O" LEFT="7" NAME="o_wr_addr" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_addr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="RAM64_0" PORT="i_Wr_Addr"/>
+            <CONNECTION INSTANCE="system_ila_0" PORT="probe2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="63" NAME="o_wr_data" RIGHT="0" SIGIS="undef" SIGNAME="to_ram_0_o_wr_data">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="RAM64_0" PORT="i_Wr_Data"/>
+            <CONNECTION INSTANCE="system_ila_0" PORT="probe3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="o_wr_dv" SIGIS="undef" SIGNAME="to_ram_0_o_wr_dv">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="RAM64_0" PORT="i_Wr_DV"/>
+            <CONNECTION INSTANCE="system_ila_0" PORT="probe4"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

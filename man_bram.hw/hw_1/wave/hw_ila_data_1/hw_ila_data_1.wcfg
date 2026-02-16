@@ -9,22 +9,22 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="24,657"></ZoomStartTime>
-      <ZoomEndTime time="33,108"></ZoomEndTime>
-      <Cursor1Time time="32,268"></Cursor1Time>
+      <ZoomStartTime time="0"></ZoomStartTime>
+      <ZoomEndTime time="1,025"></ZoomEndTime>
+      <Cursor1Time time="0"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="112"></ValueColumnWidth>
+      <ValueColumnWidth column_width="80"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="2" />
+   <WVObjectSize size="4" />
    <wave_markers>
    </wave_markers>
    <wvobject fp_name="design_1_i/system_ila_0/inst/probe0" type="array">
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">design_1_i/system_ila_0/inst/probe0[7:0]</obj_property>
-      <obj_property name="ObjectShortName">probe0[7:0]</obj_property>
-      <obj_property name="label">UART_0_DOUT</obj_property>
+      <obj_property name="ElementShortName">design_1_i/system_ila_0/inst/probe0[63:0]</obj_property>
+      <obj_property name="ObjectShortName">probe0[63:0]</obj_property>
+      <obj_property name="label">o_Rd_Data</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="LABELRADIX">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
@@ -33,8 +33,26 @@
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">design_1_i/system_ila_0/inst/probe1[0:0]</obj_property>
       <obj_property name="ObjectShortName">probe1[0:0]</obj_property>
-      <obj_property name="label">UART_0_DOUT_VLD</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="label">UART_0_DOUT_VLD</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="design_1_i/system_ila_0/inst/probe4" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">design_1_i/system_ila_0/inst/probe4[0:0]</obj_property>
+      <obj_property name="ObjectShortName">probe4[0:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="label">to_ram_0_o_wr_dv</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="design_1_i/system_ila_0/inst/probe3" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">design_1_i/system_ila_0/inst/probe3[63:0]</obj_property>
+      <obj_property name="ObjectShortName">probe3[63:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="label">to_ram_0_o_wr_data</obj_property>
       <obj_property name="LABELRADIX">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
    </wvobject>

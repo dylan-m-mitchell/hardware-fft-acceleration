@@ -32,16 +32,10 @@ module to_ram_tb();
     real r_double;
     integer i;
     
-    // RAM read port (simulated)
-    reg r_rd_dv = 1'b0;
-    reg [128-1:0] r_rd_dat128 = 128'b0;
-    
     // Output signals (captured from UUT)
     wire [$clog2(256)-1:0] w_wr_addr;
     wire w_wr_dv;
-    wire [191:0] w_wr_data;
-    wire [$clog2(256)-1:0] w_rd_addr;
-    wire w_rd_en;
+    wire [63:0] w_wr_data;
 
     // Clock generation: 10 ns period (100 MHz)
     always #5 r_clk <= ~r_clk;
@@ -54,11 +48,7 @@ module to_ram_tb();
         .i_rst(r_rst),
         .o_wr_addr(w_wr_addr),
         .o_wr_dv(w_wr_dv),
-        .o_wr_data(w_wr_data),
-        .o_rd_addr(w_rd_addr),
-        .o_rd_en(w_rd_en),
-        .i_rd_dv(r_rd_dv),
-        .i_rd_data_128(r_rd_dat128)
+        .o_wr_data(w_wr_data)
     );
     
     // Task to send a byte with valid pulse
@@ -92,18 +82,8 @@ module to_ram_tb();
             send_byte(r_double_bits[i*8 +: 8]);
         end
         
-        // Wait for FSM to enter READ state
+        // Wait for FSM to write the data
         @(posedge r_clk);
-        @(posedge r_clk);
-        
-        // Simulate RAM read response
-        @(posedge r_clk);
-        r_rd_dv <= 1'b1;
-        r_rd_dat128 <= 128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;  // Data for lower 128 bits (merged with UART 64-bit)
-        @(posedge r_clk);
-        r_rd_dv <= 1'b0;
-        
-        // Wait for write to complete
         @(posedge r_clk);
         @(posedge r_clk);
         

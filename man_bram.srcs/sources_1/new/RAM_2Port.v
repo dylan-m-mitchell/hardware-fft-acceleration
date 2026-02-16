@@ -31,7 +31,6 @@ module RAM_2Port #(parameter WIDTH = 192, DEPTH = 256)
     input                     i_Rd_Clk,
     input [$clog2(DEPTH)-1:0] i_Rd_Addr,
     input                     i_Rd_En,
-    input                     i_Rd_Sel,  // 0 = read lower 128 bits, 1 = read upper 64 bits
     output reg                o_Rd_DV,
     output reg [63:0]         o_Rd_Data_64,
     output reg [127:0]        o_Rd_Data_128
