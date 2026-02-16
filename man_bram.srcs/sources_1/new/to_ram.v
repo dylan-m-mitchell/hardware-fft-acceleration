@@ -33,7 +33,7 @@ module to_ram #(parameter DEPTH = 256)(
     output reg [$clog2(DEPTH)-1:0] o_rd_addr,
     output reg                     o_rd_en,
     input                          i_rd_dv,
-    input [191:0]                  i_rd_data
+    input [127:0]                  i_rd_data_128
     );
     
     reg [63:0]  shift_reg;
@@ -74,15 +74,19 @@ module to_ram #(parameter DEPTH = 256)(
 
                 STATE_READ: begin
                     if (i_rd_dv) begin
-                        // MERGE THE OTHER 128 BITS
-                        o_wr_data <= {shift_reg, i_rd_data[127:0]};
+                        // MERGE the 64-bit portion with the 128-bit portion
+                        o_wr_data <= { shift_reg, i_rd_data_128 };
                         o_wr_dv <= 1'b1;
                         state <= STATE_WRITE;
                     end
                 end
 
                 STATE_WRITE: begin
-                    o_wr_addr <= o_wr_addr + 1'b1;
+                    if (o_wr_addr == DEPTH - 1'b1) begin
+                        o_wr_addr <= {$clog2(DEPTH){1'b0}};
+                    end else begin
+                        o_wr_addr <= o_wr_addr + 1'b1;
+                    end
                     byte_cnt <= 3'd0;
                     state <= STATE_NOT_FULL;
                 end

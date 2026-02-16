@@ -34,7 +34,7 @@ module to_ram_tb();
     
     // RAM read port (simulated)
     reg r_rd_dv = 1'b0;
-    reg [191:0] r_rd_data = 192'b0;
+    reg [128-1:0] r_rd_dat128 = 128'b0;
     
     // Output signals (captured from UUT)
     wire [$clog2(256)-1:0] w_wr_addr;
@@ -58,7 +58,7 @@ module to_ram_tb();
         .o_rd_addr(w_rd_addr),
         .o_rd_en(w_rd_en),
         .i_rd_dv(r_rd_dv),
-        .i_rd_data(r_rd_data)
+        .i_rd_data_128(r_rd_dat128)
     );
     
     // Task to send a byte with valid pulse
@@ -99,7 +99,7 @@ module to_ram_tb();
         // Simulate RAM read response
         @(posedge r_clk);
         r_rd_dv <= 1'b1;
-        r_rd_data <= 192'h0000000000000000AAAAAAAAAAAAAAAA;  // Dummy data in lower 128 bits
+        r_rd_dat128 <= 128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;  // Data for lower 128 bits (merged with UART 64-bit)
         @(posedge r_clk);
         r_rd_dv <= 1'b0;
         
