@@ -1,0 +1,38 @@
+# Vivado Generated Files
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+.Xil/
+
+# Vivado Build Artifacts
+*.jou
+*.log
+*.pb
+*.wdb
+htr.txt
+vivado.log
+*.rpt
+*.utilization_synth*
+*.dcp
+
+# Vivado Project Files
+.cache/
+.ip_user_files/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# IDE
+.vscode/
+.DS_Store
+*.swp
+*.swo
+
+# OS
+Thumbs.db
