@@ -26,6 +26,7 @@ module to_ram #(parameter DEPTH = 256)(
     input           i_d_valid,
     input           i_rst_n,  // Active-low reset
     // Write port
+    output reg                     o_Data_Rd,
     output reg [$clog2(DEPTH)-1:0] o_wr_addr,
     output reg                     o_wr_dv,
     output reg [64-1:0]            o_wr_data
@@ -50,6 +51,7 @@ module to_ram #(parameter DEPTH = 256)(
             o_wr_addr <= {$clog2(DEPTH){1'b0}};
             o_wr_dv <= 1'b0;
             o_wr_data <= 64'd0;
+            o_Data_Rd <= 1'b0;
         end else begin
             o_wr_dv <= 1'b0;
 
@@ -73,6 +75,7 @@ module to_ram #(parameter DEPTH = 256)(
                 STATE_WRITE: begin
                     if (o_wr_addr == DEPTH - 1'b1) begin
                         o_wr_addr <= {$clog2(DEPTH){1'b0}};
+                        o_Data_Rd <= 1'b1;
                     end else begin
                         o_wr_addr <= o_wr_addr + 1'b1;
                     end

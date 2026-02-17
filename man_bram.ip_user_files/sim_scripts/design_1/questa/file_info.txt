@@ -1,7 +1,0 @@
-design_1_UART_0_2.v,verilog,xil_defaultlib,../../../bd/design_1/ip/design_1_UART_0_2/sim/design_1_UART_0_2.v,incdir="../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef"
-proc_sys_reset_v5_0_vh_rfs.vhd,vhdl,proc_sys_reset_v5_0_17,../../../../man_bram.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd,incdir="../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef"
-design_1_proc_sys_reset_0_0.vhd,vhdl,xil_defaultlib,../../../bd/design_1/ip/design_1_proc_sys_reset_0_0/sim/design_1_proc_sys_reset_0_0.vhd,incdir="../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef"
-design_1.v,verilog,xil_defaultlib,../../../bd/design_1/sim/design_1.v,incdir="../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef"
-design_1_to_ram_0_0.v,verilog,xil_defaultlib,../../../bd/design_1/ip/design_1_to_ram_0_0/sim/design_1_to_ram_0_0.v,incdir="../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef"
-design_1_RAM_2Port_0_0.v,verilog,xil_defaultlib,../../../bd/design_1/ip/design_1_RAM_2Port_0_0/sim/design_1_RAM_2Port_0_0.v,incdir="../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef"
-glbl.v,Verilog,xil_defaultlib,glbl.v
