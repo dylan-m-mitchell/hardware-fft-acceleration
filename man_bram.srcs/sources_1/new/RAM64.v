@@ -44,8 +44,8 @@ module RAM64 #(parameter WIDTH = 64, DEPTH = 256)
     end
 
     always @(posedge i_Rd_Clk) begin
-//        o_Rd_Data <= r_Mem[i_Rd_Addr];
-        o_Rd_Data <= r_Mem[0];
+        o_Rd_Data <= r_Mem[i_Rd_Addr];
+//        o_Rd_Data <= r_Mem[0];
         o_Rd_DV <= i_Rd_En;
     end
 

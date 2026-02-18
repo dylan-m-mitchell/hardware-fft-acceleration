@@ -50,7 +50,8 @@
         "i_Rd_Addr": [ { "direction": "in", "size_left": "7", "size_right": "0" } ],
         "i_Rd_En": [ { "direction": "in" } ],
         "o_Rd_DV": [ { "direction": "out" } ],
-        "o_Rd_Data": [ { "direction": "out", "size_left": "127", "size_right": "0" } ]
+        "o_Rd_Data": [ { "direction": "out", "size_left": "127", "size_right": "0" } ],
+        "o_RAM_Full": [ { "direction": "out" } ]
       },
       "interfaces": {
         "i_Rd_Clk": {
