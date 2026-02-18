@@ -35,16 +35,12 @@ module to_ram #(parameter DEPTH = 256)(
     reg [63:0]  shift_reg;
     reg [2:0]   byte_cnt;
     reg [1:0]   state;                  // 0 = NOT_FULL, 1 = WRITE
-    
-    // For testing: override reset (1 = disable reset, 0 = use i_rst_n)
-    localparam TEST_NO_RESET = 1;
-    wire w_rst_n = TEST_NO_RESET ? 1'b1 : i_rst_n;
 
     localparam STATE_NOT_FULL = 2'd0;
     localparam STATE_WRITE    = 2'd1;
 
     always @(posedge i_clk) begin
-        if (!w_rst_n) begin  // Active-low reset
+        if (!i_rst_n) begin  // Active-low reset
             shift_reg <= 64'd0;
             byte_cnt <= 3'd0;
             state <= STATE_NOT_FULL;
@@ -54,6 +50,7 @@ module to_ram #(parameter DEPTH = 256)(
             o_Data_Rd <= 1'b0;
         end else begin
             o_wr_dv <= 1'b0;
+            o_Data_Rd <= 1'b0;
 
             case (state)
                 STATE_NOT_FULL: begin         // NOT_FULL CASE
