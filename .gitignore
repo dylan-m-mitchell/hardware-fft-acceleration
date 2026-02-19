@@ -36,3 +36,6 @@ __pycache__/
 
 # OS
 Thumbs.db
+
+# Block design
+*.src/sources_1/bd
