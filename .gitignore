@@ -5,6 +5,7 @@
 *.runs/
 *.sim/
 .Xil/
+*.xpr
 
 # Vivado Build Artifacts
 *.jou
@@ -38,4 +39,4 @@ __pycache__/
 Thumbs.db
 
 # Block design
-*.src/sources_1/bd
+*.srcs/sources_1/bd/*
