@@ -18,7 +18,7 @@ vivado.log
 *.dcp
 
 # Vivado Project Files
-.cache/
+*.cache/
 .ip_user_files/
 
 # Python
