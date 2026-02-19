@@ -37,13 +37,17 @@ module RAM128 #(parameter WIDTH = 128, DEPTH = 256)
     );
 
     reg [WIDTH-1:0] r_Mem[DEPTH-1:0];
+    reg r_frame_done = 1'b0;
 
     always @(posedge i_Wr_Clk) begin
         o_RAM_Full <= 1'b0;
-        if (i_Wr_DV) begin
+        if (!i_Wr_DV) begin
+            r_frame_done <= 1'b0;
+        end else if (!r_frame_done) begin
             r_Mem[i_Wr_Addr] <= i_Wr_Data;
             if (i_Wr_Addr == DEPTH-1) begin
                 o_RAM_Full <= 1'b1;
+                r_frame_done <= 1'b1;
             end
         end
     end
