@@ -37,43 +37,37 @@ module DummyFFT #(parameter DEPTH = 256)
     output reg [$clog2(DEPTH)-1:0] o_Wr_Addr
     );
     
-    reg reading; // READING = 1, NOT READING = 0
+    reg reading = 1'b0; // READING = 1, NOT READING = 0
+    reg [$clog2(DEPTH)-1:0] r_rd_addr = {$clog2(DEPTH){1'b0}};
+    reg [$clog2(DEPTH)-1:0] r_wr_addr = {$clog2(DEPTH){1'b0}};
     
     always @(posedge i_clk) begin
-        o_DV <= 1'b0;  // Default to low
-        
-        // Trigger: i_Data_Rd pulses high when RAM is full
-        if (i_Data_Rd) begin
+        o_DV <= 1'b0;
+        o_Rd_En <= 1'b0;
+
+        if (i_Data_Rd && !reading) begin
             reading <= 1'b1;
+            r_rd_addr <= {$clog2(DEPTH){1'b0}};
+            r_wr_addr <= {$clog2(DEPTH){1'b0}};
             o_Rd_Addr <= {$clog2(DEPTH){1'b0}};
             o_Wr_Addr <= {$clog2(DEPTH){1'b0}};
-            o_Rd_En <= 1'b1;  // Pulse for initial address 0
-        end else if (reading) begin
-            // Pulse o_Rd_En only when we need the next address
-            if (i_Rd_DV) begin
-                // Duplicate 64-bit input to 128-bit output
-                o_128 <= {2{i_64}};
-                o_DV <= 1'b1;  // Pulse high to indicate valid data
-                o_Rd_En <= 1'b1;  // Pulse for next address
-                
-                // Increment write address when data is valid
-                if (o_Wr_Addr == DEPTH - 1) begin
-                    o_Wr_Addr <= o_Wr_Addr;  // Hold at max
-                end else begin
-                    o_Wr_Addr <= o_Wr_Addr + 1;
-                end
-                
-                // Stop after reading all DEPTH addresses
-                if (o_Rd_Addr == DEPTH - 1) begin
-                    reading <= 1'b0;
-                end else begin
-                    o_Rd_Addr <= o_Rd_Addr + 1;
-                end
+            o_Rd_En <= 1'b1;
+        end else if (reading && i_Rd_DV) begin
+            o_128 <= {2{i_64}};
+            o_DV <= 1'b1;
+            o_Wr_Addr <= r_wr_addr;
+
+            if (r_wr_addr == DEPTH - 1) begin
+                reading <= 1'b0;
             end else begin
-                o_Rd_En <= 1'b0;  // Keep low until next i_Rd_DV
+                r_wr_addr <= r_wr_addr + 1;
             end
-        end else begin
-            o_Rd_En <= 1'b0;
+
+            if (r_rd_addr != DEPTH - 1) begin
+                r_rd_addr <= r_rd_addr + 1;
+                o_Rd_Addr <= r_rd_addr + 1;
+                o_Rd_En <= 1'b1;
+            end
         end
     end
         
