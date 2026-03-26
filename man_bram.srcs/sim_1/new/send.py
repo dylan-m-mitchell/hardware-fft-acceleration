@@ -6,46 +6,69 @@ PORT = "COM4"
 BAUD = 115200
 NUM_VALUES = 256
 
-def build_test_doubles(num_values=NUM_VALUES):
-    """Build a deterministic list of unique double values."""
-    return [float(i) + 0.125 for i in range(num_values)]
+def build_test_u128_values(num_values=NUM_VALUES):
+    """Build a deterministic list of unique 128-bit values."""
+    values = []
+    for i in range(num_values):
+        # Create a 128-bit value: high 64 bits = i, low 64 bits = i + 0.5 (as uint64)
+        high = i
+        low = i + 0x123456789ABCDEF0
+        value = (high << 64) | low
+        values.append(value)
+    return values
 
 
-def send_64bit_values(ser, values):
-    """Send double values as 64-bit IEEE-754 words."""
+def send_128bit_values(ser, values):
+    """Send 128-bit values as little-endian byte streams."""
+    j = 0
     for i, value in enumerate(values):
-        data = struct.pack('<d', value)
-        bits_u64 = struct.unpack('<Q', data)[0]
-        print(f"Sending value {i}: {value:.6f} (0x{bits_u64:016x})")
+        # Convert 128-bit value to 16 bytes (little-endian)
+        data = value.to_bytes(16, byteorder='little', signed=False)
+        print(f"Sending value {i}: 0x{value:032x}")
+        # if j < 10:
+           
+        #    j += 1
         ser.write(data)
         # ser.flush()
 
 def receive_128bit_values(ser, num_values=NUM_VALUES):
-    """Receive 128-bit values as unsigned integers (MSB-first byte stream)."""
+    """Receive 128-bit values as unsigned integers (little-endian byte stream)."""
     received = []
+    j = 0
     for i in range(num_values):
         data = ser.read(16)
         if len(data) == 16:
             value_u128 = int.from_bytes(data, byteorder='little', signed=False)
             received.append(value_u128)
             print(f"Received value {i}: 0x{value_u128:032x}")
+            # if j < 10:
+                
+            #     j += 1
         else:
             print(f"ERROR: Expected 16 bytes for value {i}, got {len(data)}")
             break
     return received
 
 
-def expected_u128_from_doubles(values):
-    """Expected FPGA output is each 64-bit word duplicated into 128 bits."""
+def bit_reverse_u128(value):
+    """Reverse all 128 bits of a value."""
+    reversed_val = 0
+    for i in range(128):
+        if value & (1 << i):
+            reversed_val |= (1 << (127 - i))
+    return reversed_val
+
+
+def expected_u128_reversed(values):
+    """Expected FPGA output is each 128-bit word bit-reversed."""
     expected = []
     for value in values:
-        bits_u64 = struct.unpack('<Q', struct.pack('<d', value))[0]
-        expected.append((bits_u64 << 64) | bits_u64)
+        expected.append(bit_reverse_u128(value))
     return expected
 
 
 def verify_results(values, received_u128):
-    expected_u128 = expected_u128_from_doubles(values)
+    expected_u128 = expected_u128_reversed(values)
     compare_count = min(len(expected_u128), len(received_u128))
     mismatches = []
 
@@ -71,11 +94,11 @@ def verify_results(values, received_u128):
         print("\nFAIL: Did not receive all expected values.")
         return False
 
-    print("\nPASS: All returned 128-bit words match duplicated input 64-bit words.")
+    print("\nPASS: All returned 128-bit words match bit-reversed input 128-bit words.")
     return True
 
 if __name__ == "__main__":
-    test_values = build_test_doubles(NUM_VALUES)
+    test_values = build_test_u128_values(NUM_VALUES)
 
     with serial.Serial(PORT, BAUD, bytesize=8, parity='N', stopbits=1, timeout=10) as ser:
         ser.dtr = False
@@ -85,9 +108,9 @@ if __name__ == "__main__":
         ser.reset_output_buffer()
 
         print("=" * 50)
-        print(f"Sending {NUM_VALUES} unique double values to FPGA...")
+        print(f"Sending {NUM_VALUES} unique 128-bit values to FPGA...")
         print("=" * 50)
-        send_64bit_values(ser, test_values)
+        send_128bit_values(ser, test_values)
 
         print("\n" + "=" * 50)
         print(f"Waiting for {NUM_VALUES} x 128-bit values from FPGA...")
