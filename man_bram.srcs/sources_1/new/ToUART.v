@@ -25,7 +25,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ToUART #(parameter DEPTH = 256)
+module ToUART #(parameter DEPTH = 64)
     (
     input                          i_clk,
     input [127:0]                  i_128,

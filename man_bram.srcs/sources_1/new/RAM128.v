@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module RAM128 #(parameter WIDTH = 128, DEPTH = 256)
+module RAM128 #(parameter WIDTH = 128, DEPTH = 64)
     (
     // Write signals
     input                     i_Wr_Clk,

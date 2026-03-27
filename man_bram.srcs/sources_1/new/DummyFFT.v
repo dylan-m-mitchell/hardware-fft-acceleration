@@ -24,7 +24,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module DummyFFT #(parameter DEPTH = 256)
+module DummyFFT #(parameter DEPTH = 64)
     (
     input                          i_clk,
     input [127:0]                  i_128,

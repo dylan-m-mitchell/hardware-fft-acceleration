@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module to_ram #(parameter DEPTH = 256)(
+module to_ram #(parameter DEPTH = 64)(
     input           i_clk,
     input [7:0]     i_data,
     input           i_d_valid,
