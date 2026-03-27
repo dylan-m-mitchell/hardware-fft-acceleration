@@ -34,6 +34,7 @@ __pycache__/
 .DS_Store
 *.swp
 *.swo
+.github/
 
 # OS
 Thumbs.db
