@@ -29,11 +29,11 @@ module to_ram #(parameter DEPTH = 256)(
     output reg                     o_Data_Rd,
     output reg [$clog2(DEPTH)-1:0] o_wr_addr,
     output reg                     o_wr_dv,
-    output reg [64-1:0]            o_wr_data
+    output reg [128-1:0]           o_wr_data
     );
     
-    reg [63:0]  shift_reg;
-    reg [2:0]   byte_cnt;
+    reg [127:0] shift_reg;
+    reg [3:0]   byte_cnt;
     reg [1:0]   state;                  // 0 = NOT_FULL, 1 = WRITE
 
     localparam STATE_NOT_FULL = 2'd0;
@@ -41,12 +41,12 @@ module to_ram #(parameter DEPTH = 256)(
 
     always @(posedge i_clk) begin
         if (!i_rst_n) begin  // Active-low reset
-            shift_reg <= 64'd0;
-            byte_cnt <= 3'd0;
+            shift_reg <= 128'd0;
+            byte_cnt <= 4'd0;
             state <= STATE_NOT_FULL;
             o_wr_addr <= {$clog2(DEPTH){1'b0}};
             o_wr_dv <= 1'b0;
-            o_wr_data <= 64'd0;
+            o_wr_data <= 128'd0;
             o_Data_Rd <= 1'b0;
         end else begin
             o_wr_dv <= 1'b0;
@@ -55,16 +55,16 @@ module to_ram #(parameter DEPTH = 256)(
             case (state)
                 STATE_NOT_FULL: begin         // NOT_FULL CASE
                     if (i_d_valid) begin
-                        shift_reg <= {i_data, shift_reg[63:8]};
+                        shift_reg <= {i_data, shift_reg[127:8]};
                         
-                        if (byte_cnt == 3'd7) begin
-                            // Received 8th byte
-                            o_wr_data <= {i_data, shift_reg[63:8]};
+                        if (byte_cnt == 4'd15) begin
+                            // Received 16th byte (128 bits total)
+                            o_wr_data <= {i_data, shift_reg[127:8]};
                             o_wr_dv <= 1'b1;
-                            byte_cnt <= 3'd0;
+                            byte_cnt <= 4'd0;
                             state <= STATE_WRITE;
                         end else begin
-                            byte_cnt <= byte_cnt + 3'd1;
+                            byte_cnt <= byte_cnt + 4'd1;
                         end
                     end
                 end
