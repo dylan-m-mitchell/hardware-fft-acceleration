@@ -1,0 +1,24 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/complex_mult_test.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module complex_mult
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_256.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_256
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_256_butterfly.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_256_butterfly
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_butterfly.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fft_butterfly
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fp64_adder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fp64_adder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fp64_fpu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fp64_fpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/hp_class.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hp_class
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/hp_mul.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hp_mul
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/ram_to_fft256_bridge.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ram_to_fft256_bridge
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/twiddle_rom.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module twiddle_rom
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.srcs/sim_1/imports/new/ram_to_fft256_bridge_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ram_to_fft256_bridge_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/dlnmt/man_bram/man_bram.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

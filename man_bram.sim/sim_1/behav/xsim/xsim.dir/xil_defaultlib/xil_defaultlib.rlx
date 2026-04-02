@@ -1,0 +1,16 @@
+0.7
+2020.2
+May 22 2025
+00:13:55
+C:/Users/dlnmt/man_bram/man_bram.sim/sim_1/behav/xsim/glbl.v,1741209010,verilog,,,,glbl,,,,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sim_1/imports/new/ram_to_fft256_bridge_tb.v,1774580062,verilog,,,,ram_to_fft256_bridge_tb,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/complex_mult_test.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_256.v,,complex_mult,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_256.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_256_butterfly.v,,fft_256,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_256_butterfly.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_butterfly.v,,fft_256_butterfly,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fft_butterfly.v,1774486597,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fp64_adder.v,,fft_butterfly,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fp64_adder.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fp64_fpu.v,,fp64_adder,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/fp64_fpu.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/hp_class.v,,fp64_fpu,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/hp_class.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/hp_mul.v,,hp_class,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/hp_mul.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/ram_to_fft256_bridge.v,,hp_mul,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/twiddle_rom.v,1774479891,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sim_1/imports/new/ram_to_fft256_bridge_tb.v,,twiddle_rom,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
+C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/ram_to_fft256_bridge.v,1774485510,verilog,,C:/Users/dlnmt/man_bram/man_bram.srcs/sources_1/new/fft/twiddle_rom.v,,ram_to_fft256_bridge,,,../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef,,,,,
