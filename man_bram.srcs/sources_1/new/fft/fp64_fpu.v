@@ -21,7 +21,9 @@
 //                                [0] = inexact   (result was rounded)
 //////////////////////////////////////////////////////////////////////////////
 
-module fp64_fpu (
+module fp64_fpu #(
+    parameter [1:0] STATIC_OP = 2'b11
+) (
     input  wire [63:0] a_data,
     input  wire [63:0] b_data,
     input  wire [1:0]  op,
@@ -35,6 +37,12 @@ module fp64_fpu (
     localparam OP_ADD = 2'b00;
     localparam OP_SUB = 2'b01;
     localparam OP_MUL = 2'b10;
+    localparam OP_DYN = 2'b11;
+
+    // Effective operation select:
+    // - STATIC_OP == OP_DYN: use runtime op
+    // - Otherwise: force compile-time selected op
+    wire [1:0] op_eff = (STATIC_OP == OP_DYN) ? op : STATIC_OP;
 
     // -----------------------------------------------------------------------
     // Internal wires for sub-unit results
@@ -48,31 +56,59 @@ module fp64_fpu (
     // -----------------------------------------------------------------------
     // SUB is ADD with b's sign flipped
     // -----------------------------------------------------------------------
-    wire [63:0] adder_b = (op == OP_SUB) ? {~b_data[63], b_data[62:0]} : b_data;
-    
-    // -----------------------------------------------------------------------
-    // Adder instance (handles both ADD and SUB)
-    // -----------------------------------------------------------------------
-    fp64_adder u_adder (
-        .a_data (a_data),
-        .b_data (adder_b),
-        .result (add_result)
-    );
+    wire [63:0] adder_b = (op_eff == OP_SUB) ? {~b_data[63], b_data[62:0]} : b_data;
 
     // -----------------------------------------------------------------------
-    // Multiplier instance
+    // Operation unit instantiation (compile-time pruning by STATIC_OP)
     // -----------------------------------------------------------------------
-    hp_mul u_mul (
-        .a         (a_data),
-        .b         (b_data),
-        .p         (mul_result),
-        .qnan      (mul_qnan),
-        .infinity  (mul_infinity),
-        .zero      (mul_zero),
-        .subnormal (mul_subnormal),
-        .normal    (mul_normal),
-        .done      (mul_done)
-    );
+    generate
+        if (STATIC_OP == OP_MUL) begin : g_mul_only
+            assign add_result = 64'h7FF8_0000_0000_0000;
+
+            hp_mul u_mul (
+                .a         (a_data),
+                .b         (b_data),
+                .p         (mul_result),
+                .qnan      (mul_qnan),
+                .infinity  (mul_infinity),
+                .zero      (mul_zero),
+                .subnormal (mul_subnormal),
+                .normal    (mul_normal),
+                .done      (mul_done)
+            );
+        end else if (STATIC_OP == OP_ADD || STATIC_OP == OP_SUB) begin : g_addsub_only
+            assign mul_result    = 64'h7FF8_0000_0000_0000;
+            assign mul_qnan      = 1'b0;
+            assign mul_infinity  = 1'b0;
+            assign mul_zero      = 1'b0;
+            assign mul_subnormal = 1'b0;
+            assign mul_normal    = 1'b0;
+
+            fp64_adder u_adder (
+                .a_data (a_data),
+                .b_data (adder_b),
+                .result (add_result)
+            );
+        end else begin : g_dynamic
+            fp64_adder u_adder (
+                .a_data (a_data),
+                .b_data (adder_b),
+                .result (add_result)
+            );
+
+            hp_mul u_mul (
+                .a         (a_data),
+                .b         (b_data),
+                .p         (mul_result),
+                .qnan      (mul_qnan),
+                .infinity  (mul_infinity),
+                .zero      (mul_zero),
+                .subnormal (mul_subnormal),
+                .normal    (mul_normal),
+                .done      (mul_done)
+            );
+        end
+    endgenerate
 
     // -----------------------------------------------------------------------
     // Result MUX
@@ -82,7 +118,7 @@ module fp64_fpu (
 	
 	always @(*) begin
 	// Get result to result mux.
-        case (op)
+    case (op_eff)
             OP_ADD:  result_mux = add_result;
             OP_SUB:  result_mux = add_result;
             OP_MUL:  result_mux = mul_result;
@@ -130,11 +166,11 @@ module fp64_fpu (
             flag_invalid = 1'b1;
         end
         // inf - inf or inf + (-inf)
-        else if ((op == OP_ADD || op == OP_SUB) && a_is_inf && res_is_nan) begin
+        else if ((op_eff == OP_ADD || op_eff == OP_SUB) && a_is_inf && res_is_nan) begin
             flag_invalid = 1'b1;
         end
         // inf * 0 or 0 * inf
-        else if (op == OP_MUL && ((a_is_inf && b_is_zero) || (a_is_zero && b_is_inf))) begin
+        else if (op_eff == OP_MUL && ((a_is_inf && b_is_zero) || (a_is_zero && b_is_inf))) begin
             flag_invalid = 1'b1;
         end
 
@@ -154,7 +190,7 @@ module fp64_fpu (
             // Only flag underflow if both inputs were non-zero finite
             if (!a_is_inf && !b_is_inf) begin
                 // For MUL: two subnormals multiply to zero
-                if (op == OP_MUL)
+                if (op_eff == OP_MUL)
                     flag_underflow = 1'b1;
             end
         end

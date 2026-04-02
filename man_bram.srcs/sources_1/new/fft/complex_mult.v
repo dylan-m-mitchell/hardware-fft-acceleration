@@ -21,12 +21,10 @@ module complex_mult(
     // Internal regs for intermediate values and fpus
     // -----------------------------------------------------------------------
 	
-    reg [1:0] add, sub, mul;	
-	reg [63:0] outi_mux, outr_mux;
 	wire [63:0] p1_result, p2_result, apb_result, cpd_result, p3_result, p3mp2_result, p1mp2_result, p32mp1_result;
 
-	assign outi_data = outi_mux;
-	assign outr_data = outr_mux;
+	assign outr_data = p1mp2_result;
+	assign outi_data = p32mp1_result;
 	// -----------------------------------------------------------------------
     // Operation encoding for FPUs
     // -----------------------------------------------------------------------
@@ -37,70 +35,75 @@ module complex_mult(
 	// -----------------------------------------------------------------------
     // FPU instances
     // -----------------------------------------------------------------------
-	fp64_fpu p1(
+	fp64_fpu #(
+		.STATIC_OP			(OP_MUL)
+	) p1(
 		.a_data			(a_data),
 		.b_data			(c_data),
-		.op				(mul),
+		.op				(OP_MUL),
 		.result			(p1_result)
 	);
 	
-	fp64_fpu p2(
+	fp64_fpu #(
+		.STATIC_OP			(OP_MUL)
+	) p2(
 		.a_data			(b_data),
 		.b_data			(d_data),
-		.op				(mul),
+		.op				(OP_MUL),
 		.result			(p2_result)
 	);
 	
-	fp64_fpu apb(
+	fp64_fpu #(
+		.STATIC_OP			(OP_ADD)
+	) apb(
 		.a_data			(a_data),
 		.b_data			(b_data),
-		.op				(add),
+		.op				(OP_ADD),
 		.result			(apb_result)
 	);
 	
-	fp64_fpu cpd(
+	fp64_fpu #(
+		.STATIC_OP			(OP_ADD)
+	) cpd(
 		.a_data			(c_data),
 		.b_data			(d_data),
-		.op				(add),
+		.op				(OP_ADD),
 		.result			(cpd_result)
 	);
 	
-	fp64_fpu p3(
+	fp64_fpu #(
+		.STATIC_OP			(OP_MUL)
+	) p3(
 		.a_data			(apb_result),
 		.b_data			(cpd_result),
-		.op				(mul),
+		.op				(OP_MUL),
 		.result			(p3_result)
 	);
 	
-	fp64_fpu p1mp2(
+	fp64_fpu #(
+		.STATIC_OP			(OP_SUB)
+	) p1mp2(
 		.a_data			(p1_result),
 		.b_data			(p2_result),
-		.op				(sub),
+		.op				(OP_SUB),
 		.result			(p1mp2_result)
 	);
 	
-	fp64_fpu p3mp2(
+	fp64_fpu #(
+		.STATIC_OP			(OP_SUB)
+	) p3mp2(
 		.a_data			(p3_result),
 		.b_data			(p2_result),
-		.op				(sub),
+		.op				(OP_SUB),
 		.result			(p3mp2_result)
 	);
 	
-	fp64_fpu p32mp1(
+	fp64_fpu #(
+		.STATIC_OP			(OP_SUB)
+	) p32mp1(
 		.a_data			(p3mp2_result),
 		.b_data			(p1_result),
-		.op				(sub),
+		.op				(OP_SUB),
 		.result			(p32mp1_result)
 	);
-	
-	initial begin
-		add = OP_ADD;
-		sub = OP_SUB;
-		mul = OP_MUL;
-	end
-	
-	always @(*) begin
-		outr_mux = p1mp2_result;
-		outi_mux = p32mp1_result;
-	end
 endmodule
