@@ -1,13 +1,10 @@
-verilog xil_defaultlib -i "../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" --include "../../../../man_bram.gen/sources_1/bd/design_1/ipshared/5431/hdl/verilog" --include "../../../../man_bram.gen/sources_1/bd/design_1/ipshared/4e08/hdl/verilog" --include "../../../../man_bram.gen/sources_1/bd/design_1/ipshared/537f/hdl/verilog" --include "../../../../man_bram.gen/sources_1/bd/design_1/ipshared/d41f/hdl/verilog" \
+verilog xil_defaultlib -i "../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" \
 "../../../bd/design_1/ip/design_1_UART_0_2/sim/design_1_UART_0_2.v" \
 "../../../bd/design_1/ip/design_1_to_ram_0_0/sim/design_1_to_ram_0_0.v" \
-"../../../bd/design_1/ip/design_1_RAM64_0_0/sim/design_1_RAM64_0_0.v" \
-"../../../bd/design_1/ip/design_1_DummyFFT_0_0/sim/design_1_DummyFFT_0_0.v" \
-"../../../bd/design_1/ip/design_1_RAM128_0_0/sim/design_1_RAM128_0_0.v" \
 "../../../bd/design_1/ip/design_1_ToUART_0_1/sim/design_1_ToUART_0_1.v" \
-"../../../bd/design_1/ip/design_1_system_ila_1_1/bd_0/ip/ip_0/sim/bd_f69c_ila_lib_0.v" \
-"../../../bd/design_1/ip/design_1_system_ila_1_1/bd_0/sim/bd_f69c.v" \
-"../../../bd/design_1/ip/design_1_system_ila_1_1/sim/design_1_system_ila_1_1.v" \
+"../../../bd/design_1/ip/design_1_RAM64_0_0/sim/design_1_RAM64_0_0.v" \
+"../../../bd/design_1/ip/design_1_RAM128_0_0/sim/design_1_RAM128_0_0.v" \
+"../../../bd/design_1/ip/design_1_DummyFFT_0_0/sim/design_1_DummyFFT_0_0.v" \
 "../../../bd/design_1/sim/design_1.v" \
 
 verilog xil_defaultlib "glbl.v"

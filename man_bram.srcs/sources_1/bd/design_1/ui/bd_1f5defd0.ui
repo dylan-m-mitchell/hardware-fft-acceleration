@@ -1,43 +1,52 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.701433",
-   "Default View_TopLeft":"-144,-123",
+   "Default View_ScaleFactor":"0.830228",
+   "Default View_TopLeft":"101,-48",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0
 #  -string -flagsOSRD
-preplace port port-id_UART_RXD_0 -pg 1 -lvl 0 -x 0 -y 150 -defaultsOSRD
-preplace port port-id_UART_TXD_0 -pg 1 -lvl 5 -x 1500 -y 250 -defaultsOSRD
-preplace port port-id_clk_in1_0 -pg 1 -lvl 0 -x 0 -y 210 -defaultsOSRD
-preplace port port-id_ext_reset_in_0 -pg 1 -lvl 0 -x 0 -y 230 -defaultsOSRD
-preplace inst UART_0 -pg 1 -lvl 4 -x 1310 -y 300 -defaultsOSRD
-preplace inst proc_sys_reset_0 -pg 1 -lvl 3 -x 950 -y 100 -defaultsOSRD
-preplace inst to_ram_0 -pg 1 -lvl 1 -x 190 -y 340 -defaultsOSRD
-preplace inst ToUART_0 -pg 1 -lvl 3 -x 950 -y 300 -defaultsOSRD
-preplace inst fft32_ram_wrapper_0 -pg 1 -lvl 2 -x 570 -y 280 -defaultsOSRD
-preplace netloc ToUART_0_o_UART_Data 1 3 1 N 320
-preplace netloc ToUART_0_o_UART_Valid 1 3 1 N 340
-preplace netloc UART_0_DIN_RDY 1 2 3 780 440 NJ 440 1480
-preplace netloc UART_0_DOUT 1 0 5 40 450 NJ 450 NJ 450 NJ 450 1460
-preplace netloc UART_0_DOUT_VLD 1 0 5 50 130 NJ 130 760J 200 1130J 190 1470
-preplace netloc UART_0_UART_TXD 1 4 1 N 250
-preplace netloc UART_RXD_0_1 1 0 4 NJ 150 NJ 150 750J 410 1160J
-preplace netloc clk_wiz_1_clk_out1 1 0 4 30 210 390 140 770 400 1150
-preplace netloc ext_reset_in_0_1 1 0 3 20 230 350 80 NJ
-preplace netloc proc_sys_reset_0_peripheral_reset 1 3 1 1140 100n
-preplace netloc to_ram_0_o_wr_addr 1 1 1 330 250n
-preplace netloc to_ram_0_o_wr_dv 1 1 1 340 270n
-preplace netloc to_ram_0_o_wr_data 1 1 1 350 290n
-preplace netloc to_ram_0_o_Data_Rd 1 1 1 N 310
-preplace netloc fft32_ram_wrapper_0_o_out_rd_data 1 2 1 N 280
-preplace netloc fft32_ram_wrapper_0_o_out_rd_dv 1 2 1 N 300
-preplace netloc fft32_ram_wrapper_0_o_out_ram_full 1 2 1 N 320
-preplace netloc ToUART_0_o_Rd_Addr 1 1 3 390 420 NJ 420 1120
-preplace netloc ToUART_0_o_Rd_En 1 1 3 380 430 NJ 430 1130
-levelinfo -pg 1 0 190 570 950 1310 1500
-pagesize -pg 1 -db -bbox -sgen -150 0 1640 460
+preplace port port-id_UART_RXD_0 -pg 1 -lvl 0 -x -10 -y 30 -defaultsOSRD
+preplace port port-id_UART_TXD_0 -pg 1 -lvl 7 -x 2140 -y 280 -defaultsOSRD
+preplace port port-id_clk_in1_0 -pg 1 -lvl 0 -x -10 -y 90 -defaultsOSRD
+preplace port port-id_ext_reset_in_0 -pg 1 -lvl 0 -x -10 -y 150 -defaultsOSRD
+preplace inst UART_0 -pg 1 -lvl 6 -x 1950 -y 330 -defaultsOSRD
+preplace inst proc_sys_reset_0 -pg 1 -lvl 5 -x 1570 -y 540 -defaultsOSRD
+preplace inst to_ram_0 -pg 1 -lvl 1 -x 180 -y 120 -defaultsOSRD
+preplace inst ToUART_0 -pg 1 -lvl 5 -x 1570 -y 110 -defaultsOSRD
+preplace inst RAM64_0 -pg 1 -lvl 2 -x 520 -y 150 -defaultsOSRD
+preplace inst RAM128_0 -pg 1 -lvl 4 -x 1200 -y 130 -defaultsOSRD
+preplace inst DummyFFT_0 -pg 1 -lvl 3 -x 840 -y 130 -defaultsOSRD
+preplace netloc ToUART_0_o_UART_Data 1 5 1 1790 130n
+preplace netloc ToUART_0_o_UART_Valid 1 5 1 1760 150n
+preplace netloc UART_0_DIN_RDY 1 4 3 1400 10 NJ 10 2110
+preplace netloc UART_0_DOUT 1 0 7 30 340 NJ 340 NJ 340 NJ 340 NJ 340 1770J 210 2100
+preplace netloc UART_0_DOUT_VLD 1 0 7 40 290 NJ 290 NJ 290 NJ 290 1400J 270 1780J 220 2120
+preplace netloc UART_0_UART_TXD 1 6 1 N 280
+preplace netloc UART_RXD_0_1 1 0 6 10J 20 330J 330 NJ 330 NJ 330 NJ 330 NJ
+preplace netloc clk_wiz_1_clk_out1 1 0 6 40 30 340 270 680 230 1010 270 1390 290 NJ
+preplace netloc ext_reset_in_0_1 1 0 5 20 10 NJ 10 NJ 10 NJ 10 1370J
+preplace netloc proc_sys_reset_0_peripheral_reset 1 5 1 1800 310n
+preplace netloc to_ram_0_o_wr_data 1 1 1 N 150
+preplace netloc to_ram_0_o_wr_dv 1 1 1 N 130
+preplace netloc to_ram_0_o_wr_addr 1 1 1 N 110
+preplace netloc RAM64_0_o_Rd_DV 1 2 1 N 140
+preplace netloc RAM64_0_o_Rd_Data 1 2 1 690 120n
+preplace netloc DummyFFT_0_o_Rd_En 1 1 3 360 30 NJ 30 980
+preplace netloc DummyFFT_0_o_Rd_Addr 1 1 3 350 0 NJ 0 990
+preplace netloc DummyFFT_0_o_Wr_Addr 1 3 1 1020 90n
+preplace netloc DummyFFT_0_o_128 1 3 1 1000 90n
+preplace netloc DummyFFT_0_o_DV 1 3 1 N 110
+preplace netloc RAM128_0_o_RAM_Full 1 4 1 1380 130n
+preplace netloc RAM128_0_o_Rd_DV 1 4 1 N 110
+preplace netloc RAM128_0_o_Rd_Data 1 4 1 1360 90n
+preplace netloc ToUART_0_o_Rd_En 1 3 3 1040 250 NJ 250 1750
+preplace netloc ToUART_0_o_Rd_Addr 1 3 3 1030 260 NJ 260 1740
+preplace netloc to_ram_0_o_Data_Rd 1 1 2 320 280 700J
+levelinfo -pg 1 -10 180 520 840 1200 1570 1950 2140
+pagesize -pg 1 -db -bbox -sgen -160 -10 2280 640
 "
 }
 {
    "da_board_cnt":"1",
-   "da_clkrst_cnt":"25"
+   "da_clkrst_cnt":"30"
 }

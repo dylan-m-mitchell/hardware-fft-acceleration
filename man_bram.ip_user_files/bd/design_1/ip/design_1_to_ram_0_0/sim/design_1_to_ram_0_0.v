@@ -76,12 +76,12 @@ input wire i_d_valid;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_rst_n, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
 input wire i_rst_n;
 output wire o_Data_Rd;
-output wire [7 : 0] o_wr_addr;
+output wire [4 : 0] o_wr_addr;
 output wire o_wr_dv;
 output wire [127 : 0] o_wr_data;
 
   to_ram #(
-    .DEPTH(256)
+    .DEPTH(32)
   ) inst (
     .i_clk(i_clk),
     .i_data(i_data),

@@ -47,58 +47,49 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: xilinx.com:module_ref:ram_to_fft256_bridge:1.0
+// IP VLNV: xilinx.com:module_ref:DummyFFT:1.0
 // IP Revision: 1
 
 `timescale 1ns/1ps
 
 (* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
-module design_1_ram_to_fft256_bridge_0_0 (
+module design_1_DummyFFT_0_0 (
   i_clk,
-  i_rst_n,
-  i_start,
-  o_ram_rd_en,
-  o_ram_rd_addr,
-  i_ram_rd_dv,
-  i_ram_rd_data,
-  o_ram_wr_en,
-  o_ram_wr_addr,
-  o_ram_wr_data,
-  o_done
+  i_128,
+  i_Rd_DV,
+  i_Data_Rd,
+  o_128,
+  o_DV,
+  o_Rd_En,
+  o_Rd_Addr,
+  o_Wr_Addr
 );
 
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 i_clk CLK" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_clk, ASSOCIATED_RESET i_rst_n, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *)
 input wire i_clk;
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 i_rst_n RST" *)
-(* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_rst_n, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-input wire i_rst_n;
-input wire i_start;
-output wire o_ram_rd_en;
-output wire [7 : 0] o_ram_rd_addr;
-input wire i_ram_rd_dv;
-input wire [127 : 0] i_ram_rd_data;
-output wire o_ram_wr_en;
-output wire [7 : 0] o_ram_wr_addr;
-output wire [127 : 0] o_ram_wr_data;
-output wire o_done;
+input wire [127 : 0] i_128;
+input wire i_Rd_DV;
+input wire i_Data_Rd;
+output wire [127 : 0] o_128;
+output wire o_DV;
+output wire o_Rd_En;
+output wire [4 : 0] o_Rd_Addr;
+output wire [4 : 0] o_Wr_Addr;
 
-  ram_to_fft256_bridge #(
-    .DEPTH(256)
+  DummyFFT #(
+    .DEPTH(32)
   ) inst (
     .i_clk(i_clk),
-    .i_rst_n(i_rst_n),
-    .i_start(i_start),
-    .o_ram_rd_en(o_ram_rd_en),
-    .o_ram_rd_addr(o_ram_rd_addr),
-    .i_ram_rd_dv(i_ram_rd_dv),
-    .i_ram_rd_data(i_ram_rd_data),
-    .o_ram_wr_en(o_ram_wr_en),
-    .o_ram_wr_addr(o_ram_wr_addr),
-    .o_ram_wr_data(o_ram_wr_data),
-    .o_done(o_done)
+    .i_128(i_128),
+    .i_Rd_DV(i_Rd_DV),
+    .i_Data_Rd(i_Data_Rd),
+    .o_128(o_128),
+    .o_DV(o_DV),
+    .o_Rd_En(o_Rd_En),
+    .o_Rd_Addr(o_Rd_Addr),
+    .o_Wr_Addr(o_Wr_Addr)
   );
 endmodule

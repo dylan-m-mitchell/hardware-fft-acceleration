@@ -2,7 +2,7 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-// Date        : Wed Feb 18 19:01:13 2026
+// Date        : Thu Apr  2 17:20:10 2026
 // Host        : dylan_pc running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               c:/Users/dlnmt/man_bram/man_bram.gen/sources_1/bd/design_1/ip/design_1_RAM128_0_0/design_1_RAM128_0_0_sim_netlist.v
@@ -28,20 +28,20 @@ module design_1_RAM128_0_0
     o_Rd_Data,
     o_RAM_Full);
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 i_Wr_Clk CLK" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_Wr_Clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *) input i_Wr_Clk;
-  input [7:0]i_Wr_Addr;
+  input [4:0]i_Wr_Addr;
   input i_Wr_DV;
   input [127:0]i_Wr_Data;
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 i_Rd_Clk CLK" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_Rd_Clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *) input i_Rd_Clk;
-  input [7:0]i_Rd_Addr;
+  input [4:0]i_Rd_Addr;
   input i_Rd_En;
   output o_Rd_DV;
   output [127:0]o_Rd_Data;
   output o_RAM_Full;
 
-  wire [7:0]i_Rd_Addr;
+  wire [4:0]i_Rd_Addr;
   wire i_Rd_Clk;
   wire i_Rd_En;
-  wire [7:0]i_Wr_Addr;
+  wire [4:0]i_Wr_Addr;
   wire i_Wr_Clk;
   wire i_Wr_DV;
   wire [127:0]i_Wr_Data;
@@ -67,35 +67,34 @@ module design_1_RAM128_0_0_RAM128
    (o_Rd_Data,
     o_Rd_DV,
     o_RAM_Full,
+    i_Wr_Addr,
     i_Rd_Clk,
     i_Wr_Clk,
     i_Rd_Addr,
-    i_Wr_Addr,
     i_Wr_Data,
     i_Wr_DV,
     i_Rd_En);
   output [127:0]o_Rd_Data;
   output o_Rd_DV;
   output o_RAM_Full;
+  input [4:0]i_Wr_Addr;
   input i_Rd_Clk;
   input i_Wr_Clk;
-  input [7:0]i_Rd_Addr;
-  input [7:0]i_Wr_Addr;
+  input [4:0]i_Rd_Addr;
   input [127:0]i_Wr_Data;
   input i_Wr_DV;
   input i_Rd_En;
 
-  wire [7:0]i_Rd_Addr;
+  wire [4:0]i_Rd_Addr;
   wire i_Rd_Clk;
   wire i_Rd_En;
-  wire [7:0]i_Wr_Addr;
+  wire [4:0]i_Wr_Addr;
   wire i_Wr_Clk;
   wire i_Wr_DV;
   wire [127:0]i_Wr_Data;
   wire o_RAM_Full;
   wire o_RAM_Full_i_1_n_0;
   wire o_RAM_Full_i_2_n_0;
-  wire o_RAM_Full_i_3_n_0;
   wire o_Rd_DV;
   wire [127:0]o_Rd_Data;
   wire r_Mem_reg_1_i_1_n_0;
@@ -118,30 +117,22 @@ module design_1_RAM128_0_0_RAM128
   wire [8:0]NLW_r_Mem_reg_1_RDADDRECC_UNCONNECTED;
 
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT4 #(
-    .INIT(16'h0100)) 
+  LUT2 #(
+    .INIT(4'h8)) 
     o_RAM_Full_i_1
-       (.I0(r_frame_done),
-        .I1(o_RAM_Full_i_2_n_0),
-        .I2(o_RAM_Full_i_3_n_0),
-        .I3(i_Wr_DV),
+       (.I0(o_RAM_Full_i_2_n_0),
+        .I1(i_Wr_DV),
         .O(o_RAM_Full_i_1_n_0));
-  LUT4 #(
-    .INIT(16'h7FFF)) 
+  LUT6 #(
+    .INIT(64'h0000000080000000)) 
     o_RAM_Full_i_2
-       (.I0(i_Wr_Addr[7]),
-        .I1(i_Wr_Addr[6]),
-        .I2(i_Wr_Addr[4]),
-        .I3(i_Wr_Addr[5]),
-        .O(o_RAM_Full_i_2_n_0));
-  LUT4 #(
-    .INIT(16'h7FFF)) 
-    o_RAM_Full_i_3
        (.I0(i_Wr_Addr[2]),
-        .I1(i_Wr_Addr[3]),
+        .I1(i_Wr_Addr[4]),
         .I2(i_Wr_Addr[0]),
         .I3(i_Wr_Addr[1]),
-        .O(o_RAM_Full_i_3_n_0));
+        .I4(i_Wr_Addr[3]),
+        .I5(r_frame_done),
+        .O(o_RAM_Full_i_2_n_0));
   FDRE o_RAM_Full_reg
        (.C(i_Wr_Clk),
         .CE(1'b1),
@@ -157,13 +148,13 @@ module design_1_RAM128_0_0_RAM128
   (* \MEM.PORTA.DATA_BIT_LAYOUT  = "p8_d64" *) 
   (* \MEM.PORTB.DATA_BIT_LAYOUT  = "p8_d64" *) 
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-6 {cell *THIS*}}" *) 
-  (* RTL_RAM_BITS = "32768" *) 
+  (* RTL_RAM_BITS = "4096" *) 
   (* RTL_RAM_NAME = "design_1_RAM128_0_0/inst/r_Mem_reg" *) 
   (* RTL_RAM_STYLE = "auto" *) 
   (* RTL_RAM_TYPE = "RAM_SDP" *) 
   (* ram_addr_begin = "0" *) 
   (* ram_addr_end = "511" *) 
-  (* ram_offset = "256" *) 
+  (* ram_offset = "480" *) 
   (* ram_slice_begin = "0" *) 
   (* ram_slice_end = "71" *) 
   RAMB36E1 #(
@@ -190,8 +181,8 @@ module design_1_RAM128_0_0_RAM128
     .WRITE_WIDTH_A(0),
     .WRITE_WIDTH_B(72)) 
     r_Mem_reg_0
-       (.ADDRARDADDR({1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
-        .ADDRBWRADDR({1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+       (.ADDRARDADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+        .ADDRBWRADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
         .CASCADEINA(1'b0),
         .CASCADEINB(1'b0),
         .CASCADEOUTA(NLW_r_Mem_reg_0_CASCADEOUTA_UNCONNECTED),
@@ -225,13 +216,13 @@ module design_1_RAM128_0_0_RAM128
   (* \MEM.PORTA.DATA_BIT_LAYOUT  = "p0_d56" *) 
   (* \MEM.PORTB.DATA_BIT_LAYOUT  = "p0_d56" *) 
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-6 {cell *THIS*}}" *) 
-  (* RTL_RAM_BITS = "32768" *) 
+  (* RTL_RAM_BITS = "4096" *) 
   (* RTL_RAM_NAME = "design_1_RAM128_0_0/inst/r_Mem_reg" *) 
   (* RTL_RAM_STYLE = "auto" *) 
   (* RTL_RAM_TYPE = "RAM_SDP" *) 
   (* ram_addr_begin = "0" *) 
   (* ram_addr_end = "511" *) 
-  (* ram_offset = "256" *) 
+  (* ram_offset = "480" *) 
   (* ram_slice_begin = "72" *) 
   (* ram_slice_end = "127" *) 
   RAMB36E1 #(
@@ -258,8 +249,8 @@ module design_1_RAM128_0_0_RAM128
     .WRITE_WIDTH_A(0),
     .WRITE_WIDTH_B(72)) 
     r_Mem_reg_1
-       (.ADDRARDADDR({1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
-        .ADDRBWRADDR({1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+       (.ADDRARDADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+        .ADDRBWRADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
         .CASCADEINA(1'b0),
         .CASCADEINB(1'b0),
         .CASCADEOUTA(NLW_r_Mem_reg_1_CASCADEOUTA_UNCONNECTED),
@@ -296,13 +287,12 @@ module design_1_RAM128_0_0_RAM128
        (.I0(r_frame_done),
         .O(r_Mem_reg_1_i_1_n_0));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT4 #(
-    .INIT(16'hAB00)) 
+  LUT3 #(
+    .INIT(8'hE0)) 
     r_frame_done_i_1
        (.I0(r_frame_done),
-        .I1(o_RAM_Full_i_3_n_0),
-        .I2(o_RAM_Full_i_2_n_0),
-        .I3(i_Wr_DV),
+        .I1(o_RAM_Full_i_2_n_0),
+        .I2(i_Wr_DV),
         .O(r_frame_done_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 

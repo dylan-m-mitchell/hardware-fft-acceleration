@@ -2,7 +2,7 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-// Date        : Tue Mar 17 21:22:45 2026
+// Date        : Thu Apr  2 17:20:14 2026
 // Host        : dylan_pc running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               c:/Users/dlnmt/man_bram/man_bram.gen/sources_1/bd/design_1/ip/design_1_RAM64_0_0/design_1_RAM64_0_0_sim_netlist.v
@@ -27,19 +27,19 @@ module design_1_RAM64_0_0
     o_Rd_DV,
     o_Rd_Data);
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 i_Wr_Clk CLK" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_Wr_Clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *) input i_Wr_Clk;
-  input [7:0]i_Wr_Addr;
+  input [4:0]i_Wr_Addr;
   input i_Wr_DV;
   input [127:0]i_Wr_Data;
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 i_Rd_Clk CLK" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_Rd_Clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *) input i_Rd_Clk;
-  input [7:0]i_Rd_Addr;
+  input [4:0]i_Rd_Addr;
   input i_Rd_En;
   output o_Rd_DV;
   output [127:0]o_Rd_Data;
 
-  wire [7:0]i_Rd_Addr;
+  wire [4:0]i_Rd_Addr;
   wire i_Rd_Clk;
   wire i_Rd_En;
-  wire [7:0]i_Wr_Addr;
+  wire [4:0]i_Wr_Addr;
   wire i_Wr_Clk;
   wire i_Wr_DV;
   wire [127:0]i_Wr_Data;
@@ -73,16 +73,16 @@ module design_1_RAM64_0_0_RAM64
   output o_Rd_DV;
   input i_Rd_Clk;
   input i_Wr_Clk;
-  input [7:0]i_Rd_Addr;
-  input [7:0]i_Wr_Addr;
+  input [4:0]i_Rd_Addr;
+  input [4:0]i_Wr_Addr;
   input [127:0]i_Wr_Data;
   input i_Wr_DV;
   input i_Rd_En;
 
-  wire [7:0]i_Rd_Addr;
+  wire [4:0]i_Rd_Addr;
   wire i_Rd_Clk;
   wire i_Rd_En;
-  wire [7:0]i_Wr_Addr;
+  wire [4:0]i_Wr_Addr;
   wire i_Wr_Clk;
   wire i_Wr_DV;
   wire [127:0]i_Wr_Data;
@@ -113,13 +113,13 @@ module design_1_RAM64_0_0_RAM64
   (* \MEM.PORTA.DATA_BIT_LAYOUT  = "p8_d64" *) 
   (* \MEM.PORTB.DATA_BIT_LAYOUT  = "p8_d64" *) 
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-6 {cell *THIS*}}" *) 
-  (* RTL_RAM_BITS = "32768" *) 
+  (* RTL_RAM_BITS = "4096" *) 
   (* RTL_RAM_NAME = "design_1_RAM64_0_0/inst/r_Mem_reg" *) 
   (* RTL_RAM_STYLE = "auto" *) 
   (* RTL_RAM_TYPE = "RAM_SDP" *) 
   (* ram_addr_begin = "0" *) 
   (* ram_addr_end = "511" *) 
-  (* ram_offset = "256" *) 
+  (* ram_offset = "480" *) 
   (* ram_slice_begin = "0" *) 
   (* ram_slice_end = "71" *) 
   RAMB36E1 #(
@@ -146,8 +146,8 @@ module design_1_RAM64_0_0_RAM64
     .WRITE_WIDTH_A(0),
     .WRITE_WIDTH_B(72)) 
     r_Mem_reg_0
-       (.ADDRARDADDR({1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
-        .ADDRBWRADDR({1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+       (.ADDRARDADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+        .ADDRBWRADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
         .CASCADEINA(1'b0),
         .CASCADEINB(1'b0),
         .CASCADEOUTA(NLW_r_Mem_reg_0_CASCADEOUTA_UNCONNECTED),
@@ -181,13 +181,13 @@ module design_1_RAM64_0_0_RAM64
   (* \MEM.PORTA.DATA_BIT_LAYOUT  = "p0_d56" *) 
   (* \MEM.PORTB.DATA_BIT_LAYOUT  = "p0_d56" *) 
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-6 {cell *THIS*}}" *) 
-  (* RTL_RAM_BITS = "32768" *) 
+  (* RTL_RAM_BITS = "4096" *) 
   (* RTL_RAM_NAME = "design_1_RAM64_0_0/inst/r_Mem_reg" *) 
   (* RTL_RAM_STYLE = "auto" *) 
   (* RTL_RAM_TYPE = "RAM_SDP" *) 
   (* ram_addr_begin = "0" *) 
   (* ram_addr_end = "511" *) 
-  (* ram_offset = "256" *) 
+  (* ram_offset = "480" *) 
   (* ram_slice_begin = "72" *) 
   (* ram_slice_end = "127" *) 
   RAMB36E1 #(
@@ -214,8 +214,8 @@ module design_1_RAM64_0_0_RAM64
     .WRITE_WIDTH_A(0),
     .WRITE_WIDTH_B(72)) 
     r_Mem_reg_1
-       (.ADDRARDADDR({1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
-        .ADDRBWRADDR({1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+       (.ADDRARDADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Rd_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+        .ADDRBWRADDR({1'b1,1'b1,1'b1,1'b1,1'b1,i_Wr_Addr,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
         .CASCADEINA(1'b0),
         .CASCADEINB(1'b0),
         .CASCADEOUTA(NLW_r_Mem_reg_1_CASCADEOUTA_UNCONNECTED),

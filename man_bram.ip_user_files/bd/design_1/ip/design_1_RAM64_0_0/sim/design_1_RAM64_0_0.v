@@ -70,21 +70,21 @@ module design_1_RAM64_0_0 (
 (* X_INTERFACE_MODE = "slave" *)
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_Wr_Clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *)
 input wire i_Wr_Clk;
-input wire [7 : 0] i_Wr_Addr;
+input wire [4 : 0] i_Wr_Addr;
 input wire i_Wr_DV;
 input wire [127 : 0] i_Wr_Data;
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 i_Rd_Clk CLK" *)
 (* X_INTERFACE_MODE = "slave" *)
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME i_Rd_Clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_in1_0, INSERT_VIP 0" *)
 input wire i_Rd_Clk;
-input wire [7 : 0] i_Rd_Addr;
+input wire [4 : 0] i_Rd_Addr;
 input wire i_Rd_En;
 output wire o_Rd_DV;
 output wire [127 : 0] o_Rd_Data;
 
   RAM64 #(
     .WIDTH(128),
-    .DEPTH(256)
+    .DEPTH(32)
   ) inst (
     .i_Wr_Clk(i_Wr_Clk),
     .i_Wr_Addr(i_Wr_Addr),

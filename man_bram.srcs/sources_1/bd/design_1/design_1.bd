@@ -15,7 +15,9 @@
       "proc_sys_reset_0": "",
       "to_ram_0": "",
       "ToUART_0": "",
-      "fft32_ram_wrapper_0": ""
+      "RAM64_0": "",
+      "RAM128_0": "",
+      "DummyFFT_0": ""
     },
     "ports": {
       "UART_RXD_0": {
@@ -268,16 +270,147 @@
           }
         }
       },
-      "fft32_ram_wrapper_0": {
-        "vlnv": "xilinx.com:module_ref:fft32_ram_wrapper:1.0",
+      "RAM64_0": {
+        "vlnv": "xilinx.com:module_ref:RAM64:1.0",
         "ip_revision": "1",
-        "xci_name": "design_1_fft32_ram_wrapper_0_0",
-        "xci_path": "ip\\design_1_fft32_ram_wrapper_0_0\\design_1_fft32_ram_wrapper_0_0.xci",
-        "inst_hier_path": "fft32_ram_wrapper_0",
+        "xci_name": "design_1_RAM64_0_0",
+        "xci_path": "ip\\design_1_RAM64_0_0\\design_1_RAM64_0_0.xci",
+        "inst_hier_path": "RAM64_0",
         "has_run_ip_tcl": "true",
         "reference_info": {
           "ref_type": "hdl",
-          "ref_name": "fft32_ram_wrapper",
+          "ref_name": "RAM64",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "i_Wr_Clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_in1_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "i_Wr_Addr": {
+            "direction": "I",
+            "left": "4",
+            "right": "0"
+          },
+          "i_Wr_DV": {
+            "direction": "I"
+          },
+          "i_Wr_Data": {
+            "direction": "I",
+            "left": "127",
+            "right": "0"
+          },
+          "i_Rd_Clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_in1_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "i_Rd_Addr": {
+            "direction": "I",
+            "left": "4",
+            "right": "0"
+          },
+          "i_Rd_En": {
+            "direction": "I"
+          },
+          "o_Rd_DV": {
+            "direction": "O"
+          },
+          "o_Rd_Data": {
+            "direction": "O",
+            "left": "127",
+            "right": "0"
+          }
+        }
+      },
+      "RAM128_0": {
+        "vlnv": "xilinx.com:module_ref:RAM128:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_RAM128_0_0",
+        "xci_path": "ip\\design_1_RAM128_0_0\\design_1_RAM128_0_0.xci",
+        "inst_hier_path": "RAM128_0",
+        "has_run_ip_tcl": "true",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "RAM128",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "i_Wr_Clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_in1_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "i_Wr_Addr": {
+            "direction": "I",
+            "left": "4",
+            "right": "0"
+          },
+          "i_Wr_DV": {
+            "direction": "I"
+          },
+          "i_Wr_Data": {
+            "direction": "I",
+            "left": "127",
+            "right": "0"
+          },
+          "i_Rd_Clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_in1_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "i_Rd_Addr": {
+            "direction": "I",
+            "left": "4",
+            "right": "0"
+          },
+          "i_Rd_En": {
+            "direction": "I"
+          },
+          "o_Rd_DV": {
+            "direction": "O"
+          },
+          "o_Rd_Data": {
+            "direction": "O",
+            "left": "127",
+            "right": "0"
+          },
+          "o_RAM_Full": {
+            "direction": "O"
+          }
+        }
+      },
+      "DummyFFT_0": {
+        "vlnv": "xilinx.com:module_ref:DummyFFT:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_DummyFFT_0_0",
+        "xci_path": "ip\\design_1_DummyFFT_0_0\\design_1_DummyFFT_0_0.xci",
+        "inst_hier_path": "DummyFFT_0",
+        "has_run_ip_tcl": "true",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "DummyFFT",
           "boundary_crc": "0x0"
         },
         "ports": {
@@ -285,81 +418,118 @@
             "type": "clk",
             "direction": "I",
             "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "i_rst_n",
-                "value_src": "constant"
-              },
               "CLK_DOMAIN": {
                 "value": "design_1_clk_in1_0",
                 "value_src": "default_prop"
               }
             }
           },
-          "i_rst_n": {
-            "type": "rst",
-            "direction": "I",
-            "parameters": {
-              "POLARITY": {
-                "value": "ACTIVE_LOW",
-                "value_src": "constant"
-              }
-            }
-          },
-          "i_in_wr_addr": {
-            "direction": "I",
-            "left": "4",
-            "right": "0"
-          },
-          "i_in_wr_dv": {
-            "direction": "I"
-          },
-          "i_in_wr_data": {
+          "i_128": {
             "direction": "I",
             "left": "127",
             "right": "0"
           },
-          "i_start": {
+          "i_Rd_DV": {
             "direction": "I"
           },
-          "o_busy": {
-            "direction": "O"
-          },
-          "o_done": {
-            "direction": "O"
-          },
-          "i_out_rd_addr": {
-            "direction": "I",
-            "left": "4",
-            "right": "0"
-          },
-          "i_out_rd_en": {
+          "i_Data_Rd": {
             "direction": "I"
           },
-          "o_out_rd_data": {
+          "o_128": {
             "direction": "O",
             "left": "127",
             "right": "0"
           },
-          "o_out_rd_dv": {
+          "o_DV": {
             "direction": "O"
           },
-          "o_out_ram_full": {
+          "o_Rd_En": {
             "direction": "O"
+          },
+          "o_Rd_Addr": {
+            "direction": "O",
+            "left": "4",
+            "right": "0"
+          },
+          "o_Wr_Addr": {
+            "direction": "O",
+            "left": "4",
+            "right": "0"
           }
         }
       }
     },
     "nets": {
+      "DummyFFT_0_o_128": {
+        "ports": [
+          "DummyFFT_0/o_128",
+          "RAM128_0/i_Wr_Data"
+        ]
+      },
+      "DummyFFT_0_o_DV": {
+        "ports": [
+          "DummyFFT_0/o_DV",
+          "RAM128_0/i_Wr_DV"
+        ]
+      },
+      "DummyFFT_0_o_Rd_Addr": {
+        "ports": [
+          "DummyFFT_0/o_Rd_Addr",
+          "RAM64_0/i_Rd_Addr"
+        ]
+      },
+      "DummyFFT_0_o_Rd_En": {
+        "ports": [
+          "DummyFFT_0/o_Rd_En",
+          "RAM64_0/i_Rd_En"
+        ]
+      },
+      "DummyFFT_0_o_Wr_Addr": {
+        "ports": [
+          "DummyFFT_0/o_Wr_Addr",
+          "RAM128_0/i_Wr_Addr"
+        ]
+      },
+      "RAM128_0_o_RAM_Full": {
+        "ports": [
+          "RAM128_0/o_RAM_Full",
+          "ToUART_0/i_Ram_Full"
+        ]
+      },
+      "RAM128_0_o_Rd_DV": {
+        "ports": [
+          "RAM128_0/o_Rd_DV",
+          "ToUART_0/i_Valid"
+        ]
+      },
+      "RAM128_0_o_Rd_Data": {
+        "ports": [
+          "RAM128_0/o_Rd_Data",
+          "ToUART_0/i_128"
+        ]
+      },
+      "RAM64_0_o_Rd_DV": {
+        "ports": [
+          "RAM64_0/o_Rd_DV",
+          "DummyFFT_0/i_Rd_DV"
+        ]
+      },
+      "RAM64_0_o_Rd_Data": {
+        "ports": [
+          "RAM64_0/o_Rd_Data",
+          "DummyFFT_0/i_128"
+        ]
+      },
       "ToUART_0_o_Rd_Addr": {
         "ports": [
           "ToUART_0/o_Rd_Addr",
-          "fft32_ram_wrapper_0/i_out_rd_addr"
+          "RAM128_0/i_Rd_Addr"
         ]
       },
       "ToUART_0_o_Rd_En": {
         "ports": [
           "ToUART_0/o_Rd_En",
-          "fft32_ram_wrapper_0/i_out_rd_en"
+          "RAM128_0/i_Rd_En"
         ]
       },
       "ToUART_0_o_UART_Data": {
@@ -411,33 +581,18 @@
           "UART_0/CLK",
           "ToUART_0/i_clk",
           "to_ram_0/i_clk",
-          "fft32_ram_wrapper_0/i_clk"
+          "RAM64_0/i_Rd_Clk",
+          "RAM64_0/i_Wr_Clk",
+          "RAM128_0/i_Rd_Clk",
+          "RAM128_0/i_Wr_Clk",
+          "DummyFFT_0/i_clk"
         ]
       },
       "ext_reset_in_0_1": {
         "ports": [
           "ext_reset_in_0",
           "proc_sys_reset_0/ext_reset_in",
-          "to_ram_0/i_rst_n",
-          "fft32_ram_wrapper_0/i_rst_n"
-        ]
-      },
-      "fft32_ram_wrapper_0_o_out_ram_full": {
-        "ports": [
-          "fft32_ram_wrapper_0/o_out_ram_full",
-          "ToUART_0/i_Ram_Full"
-        ]
-      },
-      "fft32_ram_wrapper_0_o_out_rd_data": {
-        "ports": [
-          "fft32_ram_wrapper_0/o_out_rd_data",
-          "ToUART_0/i_128"
-        ]
-      },
-      "fft32_ram_wrapper_0_o_out_rd_dv": {
-        "ports": [
-          "fft32_ram_wrapper_0/o_out_rd_dv",
-          "ToUART_0/i_Valid"
+          "to_ram_0/i_rst_n"
         ]
       },
       "proc_sys_reset_0_peripheral_reset": {
@@ -449,25 +604,25 @@
       "to_ram_0_o_Data_Rd": {
         "ports": [
           "to_ram_0/o_Data_Rd",
-          "fft32_ram_wrapper_0/i_start"
+          "DummyFFT_0/i_Data_Rd"
         ]
       },
       "to_ram_0_o_wr_addr": {
         "ports": [
           "to_ram_0/o_wr_addr",
-          "fft32_ram_wrapper_0/i_in_wr_addr"
+          "RAM64_0/i_Wr_Addr"
         ]
       },
       "to_ram_0_o_wr_data": {
         "ports": [
           "to_ram_0/o_wr_data",
-          "fft32_ram_wrapper_0/i_in_wr_data"
+          "RAM64_0/i_Wr_Data"
         ]
       },
       "to_ram_0_o_wr_dv": {
         "ports": [
           "to_ram_0/o_wr_dv",
-          "fft32_ram_wrapper_0/i_in_wr_dv"
+          "RAM64_0/i_Wr_DV"
         ]
       }
     }

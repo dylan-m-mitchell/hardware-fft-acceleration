@@ -76,13 +76,13 @@ input wire i_Valid;
 input wire i_Ram_Full;
 output wire o_Ready;
 output wire o_Rd_En;
-output wire [7 : 0] o_Rd_Addr;
+output wire [4 : 0] o_Rd_Addr;
 output wire [7 : 0] o_UART_Data;
 output wire o_UART_Valid;
 input wire i_UART_Ready;
 
   ToUART #(
-    .DEPTH(256)
+    .DEPTH(32)
   ) inst (
     .i_clk(i_clk),
     .i_128(i_128),

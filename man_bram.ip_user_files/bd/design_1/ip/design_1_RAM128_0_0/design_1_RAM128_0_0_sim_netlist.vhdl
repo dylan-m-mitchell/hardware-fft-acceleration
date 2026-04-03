@@ -2,7 +2,7 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
--- Date        : Wed Feb 18 19:01:13 2026
+-- Date        : Thu Apr  2 17:20:10 2026
 -- Host        : dylan_pc running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               c:/Users/dlnmt/man_bram/man_bram.gen/sources_1/bd/design_1/ip/design_1_RAM128_0_0/design_1_RAM128_0_0_sim_netlist.vhdl
@@ -20,10 +20,10 @@ entity design_1_RAM128_0_0_RAM128 is
     o_Rd_Data : out STD_LOGIC_VECTOR ( 127 downto 0 );
     o_Rd_DV : out STD_LOGIC;
     o_RAM_Full : out STD_LOGIC;
+    i_Wr_Addr : in STD_LOGIC_VECTOR ( 4 downto 0 );
     i_Rd_Clk : in STD_LOGIC;
     i_Wr_Clk : in STD_LOGIC;
-    i_Rd_Addr : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    i_Wr_Addr : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    i_Rd_Addr : in STD_LOGIC_VECTOR ( 4 downto 0 );
     i_Wr_Data : in STD_LOGIC_VECTOR ( 127 downto 0 );
     i_Wr_DV : in STD_LOGIC;
     i_Rd_En : in STD_LOGIC
@@ -35,7 +35,6 @@ end design_1_RAM128_0_0_RAM128;
 architecture STRUCTURE of design_1_RAM128_0_0_RAM128 is
   signal o_RAM_Full_i_1_n_0 : STD_LOGIC;
   signal o_RAM_Full_i_2_n_0 : STD_LOGIC;
-  signal o_RAM_Full_i_3_n_0 : STD_LOGIC;
   signal r_Mem_reg_1_i_1_n_0 : STD_LOGIC;
   signal r_frame_done : STD_LOGIC;
   signal r_frame_done_i_1_n_0 : STD_LOGIC;
@@ -63,7 +62,7 @@ architecture STRUCTURE of design_1_RAM128_0_0_RAM128 is
   attribute METHODOLOGY_DRC_VIOS : string;
   attribute METHODOLOGY_DRC_VIOS of r_Mem_reg_0 : label is "{SYNTH-6 {cell *THIS*}}";
   attribute RTL_RAM_BITS : integer;
-  attribute RTL_RAM_BITS of r_Mem_reg_0 : label is 32768;
+  attribute RTL_RAM_BITS of r_Mem_reg_0 : label is 4096;
   attribute RTL_RAM_NAME : string;
   attribute RTL_RAM_NAME of r_Mem_reg_0 : label is "design_1_RAM128_0_0/inst/r_Mem_reg";
   attribute RTL_RAM_STYLE : string;
@@ -75,7 +74,7 @@ architecture STRUCTURE of design_1_RAM128_0_0_RAM128 is
   attribute ram_addr_end : integer;
   attribute ram_addr_end of r_Mem_reg_0 : label is 511;
   attribute ram_offset : integer;
-  attribute ram_offset of r_Mem_reg_0 : label is 256;
+  attribute ram_offset of r_Mem_reg_0 : label is 480;
   attribute ram_slice_begin : integer;
   attribute ram_slice_begin of r_Mem_reg_0 : label is 0;
   attribute ram_slice_end : integer;
@@ -83,49 +82,38 @@ architecture STRUCTURE of design_1_RAM128_0_0_RAM128 is
   attribute \MEM.PORTA.DATA_BIT_LAYOUT\ of r_Mem_reg_1 : label is "p0_d56";
   attribute \MEM.PORTB.DATA_BIT_LAYOUT\ of r_Mem_reg_1 : label is "p0_d56";
   attribute METHODOLOGY_DRC_VIOS of r_Mem_reg_1 : label is "{SYNTH-6 {cell *THIS*}}";
-  attribute RTL_RAM_BITS of r_Mem_reg_1 : label is 32768;
+  attribute RTL_RAM_BITS of r_Mem_reg_1 : label is 4096;
   attribute RTL_RAM_NAME of r_Mem_reg_1 : label is "design_1_RAM128_0_0/inst/r_Mem_reg";
   attribute RTL_RAM_STYLE of r_Mem_reg_1 : label is "auto";
   attribute RTL_RAM_TYPE of r_Mem_reg_1 : label is "RAM_SDP";
   attribute ram_addr_begin of r_Mem_reg_1 : label is 0;
   attribute ram_addr_end of r_Mem_reg_1 : label is 511;
-  attribute ram_offset of r_Mem_reg_1 : label is 256;
+  attribute ram_offset of r_Mem_reg_1 : label is 480;
   attribute ram_slice_begin of r_Mem_reg_1 : label is 72;
   attribute ram_slice_end of r_Mem_reg_1 : label is 127;
   attribute SOFT_HLUTNM of r_frame_done_i_1 : label is "soft_lutpair0";
 begin
-o_RAM_Full_i_1: unisim.vcomponents.LUT4
+o_RAM_Full_i_1: unisim.vcomponents.LUT2
     generic map(
-      INIT => X"0100"
+      INIT => X"8"
     )
         port map (
-      I0 => r_frame_done,
-      I1 => o_RAM_Full_i_2_n_0,
-      I2 => o_RAM_Full_i_3_n_0,
-      I3 => i_Wr_DV,
+      I0 => o_RAM_Full_i_2_n_0,
+      I1 => i_Wr_DV,
       O => o_RAM_Full_i_1_n_0
     );
-o_RAM_Full_i_2: unisim.vcomponents.LUT4
+o_RAM_Full_i_2: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"7FFF"
-    )
-        port map (
-      I0 => i_Wr_Addr(7),
-      I1 => i_Wr_Addr(6),
-      I2 => i_Wr_Addr(4),
-      I3 => i_Wr_Addr(5),
-      O => o_RAM_Full_i_2_n_0
-    );
-o_RAM_Full_i_3: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"7FFF"
+      INIT => X"0000000080000000"
     )
         port map (
       I0 => i_Wr_Addr(2),
-      I1 => i_Wr_Addr(3),
+      I1 => i_Wr_Addr(4),
       I2 => i_Wr_Addr(0),
       I3 => i_Wr_Addr(1),
-      O => o_RAM_Full_i_3_n_0
+      I4 => i_Wr_Addr(3),
+      I5 => r_frame_done,
+      O => o_RAM_Full_i_2_n_0
     );
 o_RAM_Full_reg: unisim.vcomponents.FDRE
      port map (
@@ -169,11 +157,11 @@ r_Mem_reg_0: unisim.vcomponents.RAMB36E1
       WRITE_WIDTH_B => 72
     )
         port map (
-      ADDRARDADDR(15 downto 14) => B"11",
-      ADDRARDADDR(13 downto 6) => i_Rd_Addr(7 downto 0),
+      ADDRARDADDR(15 downto 11) => B"11111",
+      ADDRARDADDR(10 downto 6) => i_Rd_Addr(4 downto 0),
       ADDRARDADDR(5 downto 0) => B"111111",
-      ADDRBWRADDR(15 downto 14) => B"11",
-      ADDRBWRADDR(13 downto 6) => i_Wr_Addr(7 downto 0),
+      ADDRBWRADDR(15 downto 11) => B"11111",
+      ADDRBWRADDR(10 downto 6) => i_Wr_Addr(4 downto 0),
       ADDRBWRADDR(5 downto 0) => B"111111",
       CASCADEINA => '0',
       CASCADEINB => '0',
@@ -239,11 +227,11 @@ r_Mem_reg_1: unisim.vcomponents.RAMB36E1
       WRITE_WIDTH_B => 72
     )
         port map (
-      ADDRARDADDR(15 downto 14) => B"11",
-      ADDRARDADDR(13 downto 6) => i_Rd_Addr(7 downto 0),
+      ADDRARDADDR(15 downto 11) => B"11111",
+      ADDRARDADDR(10 downto 6) => i_Rd_Addr(4 downto 0),
       ADDRARDADDR(5 downto 0) => B"111111",
-      ADDRBWRADDR(15 downto 14) => B"11",
-      ADDRBWRADDR(13 downto 6) => i_Wr_Addr(7 downto 0),
+      ADDRBWRADDR(15 downto 11) => B"11111",
+      ADDRBWRADDR(10 downto 6) => i_Wr_Addr(4 downto 0),
       ADDRBWRADDR(5 downto 0) => B"111111",
       CASCADEINA => '0',
       CASCADEINB => '0',
@@ -293,15 +281,14 @@ r_Mem_reg_1_i_1: unisim.vcomponents.LUT1
       I0 => r_frame_done,
       O => r_Mem_reg_1_i_1_n_0
     );
-r_frame_done_i_1: unisim.vcomponents.LUT4
+r_frame_done_i_1: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AB00"
+      INIT => X"E0"
     )
         port map (
       I0 => r_frame_done,
-      I1 => o_RAM_Full_i_3_n_0,
-      I2 => o_RAM_Full_i_2_n_0,
-      I3 => i_Wr_DV,
+      I1 => o_RAM_Full_i_2_n_0,
+      I2 => i_Wr_DV,
       O => r_frame_done_i_1_n_0
     );
 r_frame_done_reg: unisim.vcomponents.FDRE
@@ -323,11 +310,11 @@ use UNISIM.VCOMPONENTS.ALL;
 entity design_1_RAM128_0_0 is
   port (
     i_Wr_Clk : in STD_LOGIC;
-    i_Wr_Addr : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    i_Wr_Addr : in STD_LOGIC_VECTOR ( 4 downto 0 );
     i_Wr_DV : in STD_LOGIC;
     i_Wr_Data : in STD_LOGIC_VECTOR ( 127 downto 0 );
     i_Rd_Clk : in STD_LOGIC;
-    i_Rd_Addr : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    i_Rd_Addr : in STD_LOGIC_VECTOR ( 4 downto 0 );
     i_Rd_En : in STD_LOGIC;
     o_Rd_DV : out STD_LOGIC;
     o_Rd_Data : out STD_LOGIC_VECTOR ( 127 downto 0 );
@@ -358,10 +345,10 @@ architecture STRUCTURE of design_1_RAM128_0_0 is
 begin
 inst: entity work.design_1_RAM128_0_0_RAM128
      port map (
-      i_Rd_Addr(7 downto 0) => i_Rd_Addr(7 downto 0),
+      i_Rd_Addr(4 downto 0) => i_Rd_Addr(4 downto 0),
       i_Rd_Clk => i_Rd_Clk,
       i_Rd_En => i_Rd_En,
-      i_Wr_Addr(7 downto 0) => i_Wr_Addr(7 downto 0),
+      i_Wr_Addr(4 downto 0) => i_Wr_Addr(4 downto 0),
       i_Wr_Clk => i_Wr_Clk,
       i_Wr_DV => i_Wr_DV,
       i_Wr_Data(127 downto 0) => i_Wr_Data(127 downto 0),
