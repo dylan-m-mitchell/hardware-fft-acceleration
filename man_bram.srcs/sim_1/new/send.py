@@ -4,7 +4,7 @@ import time
 
 PORT = "COM4"
 BAUD = 115200
-NUM_VALUES = 64
+NUM_VALUES = 32
 
 def build_test_u128_values(num_values=NUM_VALUES):
     """Build a deterministic list of unique 128-bit values."""
