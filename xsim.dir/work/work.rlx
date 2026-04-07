@@ -1,0 +1,8 @@
+0.7
+2020.2
+Nov 14 2025
+19:37:27
+C:/Repos/hardware-fft-acceleration/man_bram.srcs/sim_1/new/ram64_dummyfft_ram128_tb.v,1775529459,systemVerilog,,,,ram64_dummyfft_ram128_tb,,,,,,,,
+C:/Repos/hardware-fft-acceleration/man_bram.srcs/sources_1/new/DummyFFT.v,1775529776,systemVerilog,,C:/Repos/hardware-fft-acceleration/man_bram.srcs/sources_1/new/RAM128.v,,DummyFFT,,,,,,,,
+C:/Repos/hardware-fft-acceleration/man_bram.srcs/sources_1/new/RAM128.v,1775084339,systemVerilog,,C:/Repos/hardware-fft-acceleration/man_bram.srcs/sim_1/new/ram64_dummyfft_ram128_tb.v,,RAM128,,,,,,,,
+C:/Repos/hardware-fft-acceleration/man_bram.srcs/sources_1/new/RAM64.v,1775084338,systemVerilog,,C:/Repos/hardware-fft-acceleration/man_bram.srcs/sources_1/new/DummyFFT.v,,RAM64,,,,,,,,

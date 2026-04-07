@@ -1,0 +1,1 @@
+"ram64_dummyfft_ram128_tb" -s "ram64_dummyfft_ram128_tb_snap" --debug "typical" 
