@@ -1,0 +1,10 @@
+man_bram.srcs/sources_1/new/fft/hp_class.v
+man_bram.srcs/sources_1/new/fft/hp_mul.v
+man_bram.srcs/sources_1/new/fft/fp64_adder.v
+man_bram.srcs/sources_1/new/fft/fp64_fpu.v
+man_bram.srcs/sources_1/new/fft/complex_mult.v
+man_bram.srcs/sources_1/new/fft/fft_butterfly.v
+man_bram.srcs/sources_1/new/fft/fft_32_butterfly.v
+man_bram.srcs/sources_1/new/fft/twiddle_rom.v
+man_bram.srcs/sources_1/new/fft/fft_32.v
+man_bram.srcs/sim_1/new/fft_32_tb.v

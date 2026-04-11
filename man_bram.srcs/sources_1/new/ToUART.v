@@ -32,6 +32,8 @@ module ToUART #(parameter DEPTH = 32)
     input                          i_Valid,
     input                          i_Ram_Full,
     output reg                     o_Ready,
+    output reg                     o_Done_Pulse,
+    output reg                     o_Done_Level,
     // RAM128 Read interface
     output reg                     o_Rd_En,
     output reg [$clog2(DEPTH)-1:0] o_Rd_Addr,
@@ -58,11 +60,14 @@ module ToUART #(parameter DEPTH = 32)
     initial o_UART_Data = 8'b0;
     initial o_UART_Valid = 1'b0;
     initial o_Ready = 1'b1;
+    initial o_Done_Pulse = 1'b0;
+    initial o_Done_Level = 1'b0;
     initial byte_count = 4'b0;
     initial r_Data = 128'b0;
 
     always @(posedge i_clk) begin
         o_Rd_En <= 1'b0;
+        o_Done_Pulse <= 1'b0;
 
         case (state)
             IDLE: begin
@@ -73,6 +78,7 @@ module ToUART #(parameter DEPTH = 32)
                 // Stay idle until RAM128 reports full, then start from address 0
                 if (i_Ram_Full) begin
                     o_Ready <= 1'b0;
+                    o_Done_Level <= 1'b0;
                     o_Rd_Addr <= {$clog2(DEPTH){1'b0}};
                     o_Rd_En <= 1'b1;
                     state <= WAIT_DATA;
@@ -105,6 +111,8 @@ module ToUART #(parameter DEPTH = 32)
                     if (byte_count == 4'd15) begin
                         // Completed this 128-bit word
                         if (o_Rd_Addr == DEPTH - 1) begin
+                            o_Done_Pulse <= 1'b1;
+                            o_Done_Level <= 1'b1;
                             state <= IDLE;
                         end else begin
                             o_Rd_Addr <= o_Rd_Addr + 1'b1;
