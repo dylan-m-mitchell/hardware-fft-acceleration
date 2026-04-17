@@ -1,6 +1,25 @@
-MIT License
+# Third-Party Licenses
 
-Copyright (c) 2026
+## uart-for-fpga (Jakub Cabal)
+
+Source:
+- https://github.com/jakubcabal/uart-for-fpga
+
+Files used in this project include:
+- man_bram.srcs/sources_1/new/uart.vhd
+- man_bram.srcs/sources_1/new/uart_tx.vhd
+- man_bram.srcs/sources_1/new/uart_rx.vhd
+- man_bram.srcs/sources_1/new/uart_parity.vhd
+- man_bram.srcs/sources_1/new/uart_clk_div.vhd
+- man_bram.srcs/sources_1/new/uart_debouncer.vhd
+
+License: MIT
+
+---
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Jakub Cabal
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
